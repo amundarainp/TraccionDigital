@@ -1,0 +1,1675 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Tracción Digital | Sistemas digitales para conseguir más consultas y
+      clientes
+    </title>
+    <meta
+      name="description"
+      content="Diseñamos sistemas digitales para que tu negocio consiga más consultas, responda mejor y convierta esas consultas en clientes. Landing, automatización de WhatsApp, Instagram, Facebook, Google Business y seguimiento comercial."
+    />
+    <style>
+      :root {
+        --bg: #0b0f16;
+        --bg-soft: #111827;
+        --bg-panel: rgba(255, 255, 255, 0.04);
+        --bg-panel-strong: rgba(255, 255, 255, 0.06);
+        --line: rgba(255, 255, 255, 0.09);
+        --line-strong: rgba(215, 180, 106, 0.24);
+        --text: #f5f7fb;
+        --muted: #b6becb;
+        --accent: #d8b56b;
+        --accent-2: #f0cb84;
+        --dark: #101010;
+        --shadow: 0 22px 60px rgba(0, 0, 0, 0.34);
+        --radius-xl: 28px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --container: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family:
+          Inter,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--text);
+        line-height: 1.55;
+        background:
+          radial-gradient(
+            circle at 10% 0%,
+            rgba(215, 180, 106, 0.13),
+            transparent 24%
+          ),
+          radial-gradient(
+            circle at 100% 10%,
+            rgba(240, 203, 132, 0.08),
+            transparent 22%
+          ),
+          linear-gradient(180deg, #0b0f16 0%, #101624 55%, #0b0f16 100%);
+      }
+
+      body.modal-open {
+        overflow: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .container {
+        width: min(100% - 32px, var(--container));
+        margin: 0 auto;
+      }
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(14px);
+        background: rgba(11, 15, 22, 0.74);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+
+      .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        min-height: 82px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+
+      .brand-logo {
+        display: block;
+        width: 200px;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        color: var(--muted);
+        font-size: 0.97rem;
+      }
+
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-height: 54px;
+        padding: 0 24px;
+        border-radius: 999px;
+        font-weight: 800;
+        border: 1px solid transparent;
+        transition:
+          transform 0.24s ease,
+          box-shadow 0.24s ease,
+          background 0.24s ease,
+          border-color 0.24s ease;
+        cursor: pointer;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: var(--dark);
+        box-shadow: 0 14px 30px rgba(215, 180, 106, 0.18);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text);
+        border-color: var(--line);
+      }
+
+      .btn-secondary:hover {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      .hero {
+        padding: 82px 0 78px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+        gap: 34px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(215, 180, 106, 0.09);
+        border: 1px solid rgba(215, 180, 106, 0.15);
+        color: var(--accent-2);
+        font-size: 0.86rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        font-size: clamp(2.8rem, 6vw, 5.3rem);
+        line-height: 0.95;
+        letter-spacing: -0.055em;
+        max-width: 11ch;
+        margin-bottom: 18px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        max-width: 62ch;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 30px;
+      }
+
+      .hero-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .hero-points span {
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .hero-card {
+        position: relative;
+        padding: 28px;
+        border-radius: var(--radius-xl);
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.035)
+        );
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+
+      .hero-card::after {
+        content: "";
+        position: absolute;
+        right: -52px;
+        bottom: -52px;
+        width: 190px;
+        height: 190px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(215, 180, 106, 0.22),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .mini-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--accent-2);
+        margin-bottom: 12px;
+        font-weight: 800;
+      }
+
+      .metric-box {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 18px 0 22px;
+      }
+
+      .metric {
+        padding: 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .metric strong {
+        display: block;
+        color: var(--accent-2);
+        font-size: 1.35rem;
+        margin-bottom: 4px;
+      }
+
+      .metric span {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
+
+      .system-list {
+        display: grid;
+        gap: 12px;
+      }
+
+      .system-item {
+        display: grid;
+        grid-template-columns: 46px 1fr;
+        gap: 14px;
+        align-items: start;
+        padding: 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .system-icon {
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: rgba(215, 180, 106, 0.12);
+        color: var(--accent-2);
+        font-weight: 900;
+        font-size: 0.95rem;
+      }
+
+      section {
+        padding: 84px 0;
+      }
+
+      .section-head {
+        max-width: 780px;
+        margin-bottom: 32px;
+      }
+
+      .section-head h2 {
+        font-size: clamp(2rem, 4vw, 3.25rem);
+        line-height: 1.02;
+        letter-spacing: -0.045em;
+        margin-bottom: 14px;
+      }
+
+      .section-head p {
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .cards-3,
+      .cards-2,
+      .pricing,
+      .faq-grid,
+      .fit-grid {
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .cards-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .cards-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+      }
+
+      .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .fit-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .pricing {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .contact-simple {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 24px;
+      }
+
+      .card,
+      .plan,
+      .faq-item,
+      .fit-card,
+      .steps-box,
+      .contact-panel {
+        padding: 30px;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.035)
+        );
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+
+      .card,
+      .faq-item,
+      .fit-card,
+      .steps-box {
+        padding: 26px;
+      }
+
+      .faq-item:hover,
+      .fit-card:hover,
+      .card:hover,
+      .steps-box:hover,
+      .contact-panel:hover {
+        transform: translateY(-4px);
+        border-color: rgba(215, 180, 106, 0.35);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      .card h3,
+      .faq-item h3,
+      .fit-card h3,
+      .steps-box h3 {
+        font-size: 1.18rem;
+        margin-bottom: 10px;
+      }
+
+      .card p,
+      .faq-item p,
+      .plan p,
+      .plan li,
+      .contact-panel p,
+      .fit-card p,
+      .steps-box p,
+      .modal-subtext,
+      label,
+      input,
+      textarea {
+        color: var(--muted);
+      }
+
+      .fit-card p,
+      .steps-box p,
+      .contact-panel p,
+      .modal-subtext {
+        font-size: 0.98rem;
+      }
+
+      .list {
+        list-style: none;
+        display: grid;
+        gap: 10px;
+        margin-top: 16px;
+      }
+
+      .list li {
+        position: relative;
+        padding-left: 24px;
+      }
+
+      .list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--accent-2);
+        font-size: 1.15rem;
+      }
+
+      .step-number {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 14px;
+        background: rgba(215, 180, 106, 0.12);
+        color: var(--accent-2);
+        font-weight: 900;
+      }
+
+      .plan {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .plan.featured {
+        background: linear-gradient(
+          180deg,
+          rgba(215, 180, 106, 0.09),
+          rgba(255, 255, 255, 0.04)
+        );
+        border-color: var(--line-strong);
+        transform: translateY(-4px);
+        box-shadow: 0 24px 48px rgba(0, 0, 0, 0.28);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        min-height: 32px;
+        padding: 0 12px;
+        border-radius: 999px;
+        font-size: 0.78rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgba(215, 180, 106, 0.12);
+        color: var(--accent-2);
+        margin-bottom: 14px;
+      }
+
+      .plan h3 {
+        font-size: 1.32rem;
+        margin-bottom: 6px;
+      }
+
+      .plan-copy {
+        min-height: 96px;
+      }
+
+      .price {
+        font-size: 2.35rem;
+        font-weight: 900;
+        line-height: 1;
+        margin: 16px 0 14px;
+        color: var(--text);
+      }
+
+      .plan .list {
+        flex-grow: 1;
+        margin-bottom: 24px;
+      }
+
+      .plan .btn {
+        width: 100%;
+        margin-top: auto;
+      }
+
+      .contact-panel {
+        background: linear-gradient(
+          135deg,
+          rgba(215, 180, 106, 0.12),
+          rgba(255, 255, 255, 0.04)
+        );
+        border-color: rgba(215, 180, 106, 0.2);
+        text-align: center;
+      }
+
+      .contact-panel .mini-title {
+        margin-bottom: 10px;
+      }
+
+      .contact-panel h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        line-height: 1.03;
+        letter-spacing: -0.04em;
+        margin-bottom: 12px;
+      }
+
+      .contact-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 22px;
+        justify-content: center;
+      }
+
+      .contact-actions .btn {
+        width: min(100%, 360px);
+      }
+
+      .footer {
+        padding: 30px 0 48px;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .footer-inner {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 24px;
+      }
+
+      .floating-wa {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        z-index: 120;
+        min-height: 58px;
+        padding: 0 18px;
+        border-radius: 999px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: var(--dark);
+        font-size: 0.98rem;
+        font-weight: 800;
+        box-shadow: 0 16px 34px rgba(215, 180, 106, 0.24);
+      }
+
+      .floating-wa-icon {
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(20px);
+        transition:
+          opacity 0.55s ease,
+          transform 0.55s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Modal */
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 300;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+      }
+
+      .modal-backdrop {
+        position: absolute;
+        inset: 0;
+        background: rgba(5, 8, 14, 0.78);
+        backdrop-filter: blur(8px);
+      }
+
+      .modal-dialog {
+        position: relative;
+        width: min(100%, 620px);
+        max-height: 90vh;
+        overflow: auto;
+        border-radius: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(
+          180deg,
+          rgba(18, 24, 36, 0.98),
+          rgba(12, 16, 24, 0.98)
+        );
+        box-shadow: 0 28px 70px rgba(0, 0, 0, 0.45);
+        padding: 28px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        border-radius: 999px;
+        cursor: pointer;
+        font-size: 1.1rem;
+      }
+
+      .modal-close:hover {
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .modal-title {
+        font-size: clamp(1.6rem, 3vw, 2.1rem);
+        line-height: 1.08;
+        letter-spacing: -0.04em;
+        margin-bottom: 10px;
+      }
+
+      .modal-subtext {
+        margin-bottom: 18px;
+      }
+
+      .modal-form {
+        display: grid;
+        gap: 14px;
+      }
+
+      .field {
+        display: grid;
+        gap: 8px;
+      }
+
+      label {
+        font-size: 0.94rem;
+        font-weight: 700;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
+        border-radius: 14px;
+        padding: 14px 16px;
+        font: inherit;
+        color: var(--text);
+        outline: none;
+        transition:
+          border-color 0.2s ease,
+          background 0.2s ease;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: #8f99a8;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: rgba(215, 180, 106, 0.42);
+        background: rgba(255, 255, 255, 0.05);
+      }
+
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .modal-note {
+        margin-top: 4px;
+        font-size: 0.88rem;
+        color: #97a0ae;
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid,
+        .cards-3,
+        .faq-grid,
+        .fit-grid,
+        .steps-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .cards-2 {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing {
+          grid-template-columns: 1fr;
+        }
+
+        .nav {
+          display: none;
+        }
+
+        h1 {
+          max-width: 100%;
+        }
+
+        .plan.featured {
+          transform: none;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .brand-logo {
+          width: 140px;
+        }
+
+        .header-inner {
+          min-height: 72px;
+        }
+
+        .hero {
+          padding-top: 56px;
+        }
+
+        section {
+          padding: 68px 0;
+        }
+
+        .hero-actions,
+        .contact-actions {
+          flex-direction: column;
+        }
+
+        .btn {
+          width: 100%;
+        }
+
+        .metric-box {
+          grid-template-columns: 1fr;
+        }
+
+        .system-item {
+          grid-template-columns: 1fr;
+        }
+
+        .floating-wa {
+          right: 14px;
+          bottom: 14px;
+          min-height: 54px;
+          padding: 0 16px;
+          font-size: 0.92rem;
+        }
+
+        .modal-dialog {
+          padding: 22px 18px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <a href="#inicio" class="brand">
+          <img class="brand-logo" src="Logo_2.png" alt="Tracción Digital" />
+        </a>
+
+        <nav class="nav">
+          <a href="#solucion">Solución</a>
+          <a href="#automatizacion">Automatización</a>
+          <a href="#proceso">Proceso</a>
+          <a href="#planes">Planes</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <div class="eyebrow">
+              Sistemas digitales para negocios que quieren crecer
+            </div>
+            <h1>Tu negocio necesita más que una página web.</h1>
+            <p>
+              Diseñamos sistemas digitales para que tu negocio consiga más
+              consultas, responda mejor y convierta esas consultas en clientes.
+              Landing, automatización y canales conectados en una estructura
+              clara.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="btn btn-primary"
+                href="https://forms.gle/HuyrDpCGwwkqLSzL6"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Solicitar diagnóstico digital
+              </a>
+              <button
+                class="btn btn-secondary open-contact-modal"
+                type="button"
+              >
+                Hablar por WhatsApp
+              </button>
+            </div>
+
+            <div class="hero-points">
+              <span>Landing profesional</span>
+              <span>WhatsApp automatizado</span>
+              <span>Instagram + Facebook</span>
+              <span>Google Business</span>
+              <span>Seguimiento comercial</span>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal">
+            <div class="mini-title">Sistema comercial claro</div>
+            <h2
+              style="
+                font-size: 1.65rem;
+                line-height: 1.14;
+                margin-bottom: 8px;
+                letter-spacing: -0.03em;
+              "
+            >
+              Menos improvisación. Más consultas. Más orden.
+            </h2>
+            <p style="color: var(--muted)">
+              Pensado para negocios que ya ofrecen un buen servicio, pero
+              necesitan una estructura seria para captar leads, responder mejor
+              y convertir con más claridad.
+            </p>
+
+            <div class="metric-box">
+              <div class="metric">
+                <strong>1</strong>
+                <span>Captación clara</span>
+              </div>
+              <div class="metric">
+                <strong>2</strong>
+                <span>Respuesta más rápida</span>
+              </div>
+              <div class="metric">
+                <strong>3</strong>
+                <span>Seguimiento real</span>
+              </div>
+            </div>
+
+            <div class="system-list">
+              <div class="system-item">
+                <div class="system-icon">01</div>
+                <div>
+                  <strong>Captación</strong>
+                  <p>
+                    Llegan consultas desde tu landing, Instagram, Facebook y
+                    Google Business.
+                  </p>
+                </div>
+              </div>
+
+              <div class="system-item">
+                <div class="system-icon">02</div>
+                <div>
+                  <strong>Respuesta</strong>
+                  <p>
+                    Automatizamos el primer contacto según el canal para
+                    responder más rápido y ordenar mejor la atención.
+                  </p>
+                </div>
+              </div>
+
+              <div class="system-item">
+                <div class="system-icon">03</div>
+                <div>
+                  <strong>Conversión</strong>
+                  <p>
+                    Dejá de perder consultas por demora, desorden o falta de
+                    seguimiento.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="problema">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>
+              Muchos negocios no necesitan más exposición. Necesitan mejor
+              estructura.
+            </h2>
+            <p>
+              Tener Instagram, WhatsApp y una cuenta de Google no alcanza si
+              todo funciona de forma desordenada. Ahí es donde se enfrían las
+              consultas y se pierden ventas.
+            </p>
+          </div>
+
+          <div class="cards-3">
+            <article class="card reveal">
+              <h3>Consultas sin seguimiento</h3>
+              <p>
+                Muchas oportunidades no se pierden porque el cliente diga que
+                no, sino porque nadie volvió a contactarlo a tiempo.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Mensajes desordenados</h3>
+              <p>
+                Cuando todo depende de responder manualmente, el proceso
+                comercial se vuelve lento, inconsistente y difícil de sostener.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Presencia digital floja</h3>
+              <p>
+                Un negocio puede trabajar bien y aun así verse poco claro, poco
+                profesional o difícil de contactar.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="solucion">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>
+              Armamos un sistema digital simple, profesional y pensado para
+              vender mejor.
+            </h2>
+            <p>
+              No se trata solo de tener una web. Se trata de tener una
+              estructura que atraiga, responda y ordene las consultas de tu
+              negocio.
+            </p>
+          </div>
+
+          <div class="cards-2">
+            <article class="card reveal">
+              <h3>Qué incluye el sistema</h3>
+              <ul class="list">
+                <ul class="list">
+                  <li>Landing clara, rápida y enfocada en conversión</li>
+                  <li>WhatsApp Business optimizado</li>
+                  <li>Automatización inicial o avanzada según el plan</li>
+                  <li>
+                    Integración y automatización de Instagram y Facebook según
+                    el plan
+                  </li>
+                  <li>Google Business optimizado</li>
+                  <li>Captación y organización de consultas</li>
+                </ul>
+              </ul>
+            </article>
+
+            <article class="card reveal">
+              <h3>Qué mejora en tu negocio</h3>
+              <ul class="list">
+                <li>Más claridad para quien te contacta</li>
+                <li>Más orden en la atención comercial</li>
+                <li>Menos consultas perdidas</li>
+                <li>Mejor imagen profesional</li>
+                <li>Más base para crecer con constancia</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="automatizacion">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>
+              Tu negocio no recibe consultas por un solo canal. Tu sistema
+              tampoco debería hacerlo.
+            </h2>
+            <p>
+              Muchas personas creen que la automatización solo existe en
+              WhatsApp, pero también es posible ordenar y responder mejor
+              consultas que llegan desde Instagram y Facebook. Según el plan,
+              integramos esos canales para que el primer contacto sea más
+              rápido, más claro y más profesional.
+            </p>
+          </div>
+
+          <div class="cards-3">
+            <article class="card reveal">
+              <h3>Instagram</h3>
+              <p>
+                Si una persona escribe desde Instagram, el sistema puede ayudar
+                a responder mejor el primer contacto y ordenar la consulta desde
+                el inicio.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Facebook</h3>
+              <p>
+                Las consultas que llegan desde Facebook también pueden
+                integrarse a la estructura comercial para que no queden sueltas
+                o desordenadas.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>Más claridad comercial</h3>
+              <p>
+                El objetivo no es responder por responder, sino lograr que cada
+                canal trabaje de forma más clara, rápida y ordenada.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Cómo trabajamos</h2>
+            <p>
+              Creamos una estructura clara para que tu negocio tenga presencia,
+              orden y una mejor conversión de consultas.
+            </p>
+          </div>
+
+          <div class="cards-2">
+            <article class="card reveal">
+              <h3>1. Analizamos tu negocio</h3>
+              <p>
+                Vemos qué ofrecés, cómo te contactan hoy y cuál es la mejor
+                estructura para que tus consultas lleguen más ordenadas.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>2. Diseñamos tu sistema digital</h3>
+              <p>
+                Organizamos tu propuesta, tus canales y tu mensaje para que tu
+                negocio se vea más profesional y sea más fácil contactarte.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>3. Automatizamos el primer contacto</h3>
+              <p>
+                Dejamos funcionando WhatsApp y, según el plan, también Instagram
+                y Facebook para responder mejor, captar datos y ordenar la
+                atención.
+              </p>
+            </article>
+
+            <article class="card reveal">
+              <h3>4. Te entregamos un sistema listo para usar</h3>
+              <p>
+                Todo queda preparado para que tu negocio pueda recibir
+                consultas, responder mejor y trabajar con más orden desde el
+                primer día.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="empezamos">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Qué pasa cuando empezamos</h2>
+            <p>
+              Una vez que avanzamos, trabajamos con un proceso claro para que el
+              proyecto sea simple, ordenado y fácil de entender.
+            </p>
+          </div>
+
+          <div class="steps-grid">
+            <article class="steps-box reveal">
+              <div class="step-number">01</div>
+              <h3>Diagnóstico</h3>
+              <p>
+                Analizamos tu negocio, tu situación actual y qué nivel de
+                sistema necesitás.
+              </p>
+            </article>
+
+            <article class="steps-box reveal">
+              <div class="step-number">02</div>
+              <h3>Estructura</h3>
+              <p>
+                Definimos la landing, el mensaje principal y el recorrido del
+                cliente.
+              </p>
+            </article>
+
+            <article class="steps-box reveal">
+              <div class="step-number">03</div>
+              <h3>Implementación</h3>
+              <p>
+                Configuramos canales, automatización y piezas necesarias según
+                el plan elegido.
+              </p>
+            </article>
+
+            <article class="steps-box reveal">
+              <div class="step-number">04</div>
+              <h3>Entrega</h3>
+              <p>
+                Te entregamos un sistema listo para empezar a recibir consultas
+                con más orden.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="negocios">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>¿Para qué negocios funciona?</h2>
+            <p>
+              Este sistema funciona especialmente bien para negocios que reciben
+              consultas por WhatsApp, redes, Google o formularios y necesitan
+              una estructura más clara para convertir mejor.
+            </p>
+          </div>
+
+          <div class="fit-grid">
+            <article class="fit-card reveal">
+              <h3>Empresas de servicios</h3>
+              <p>
+                Limpieza, mantenimiento, reformas, seguridad, logística y otros
+                servicios que trabajan con presupuestos o visitas.
+              </p>
+            </article>
+
+            <article class="fit-card reveal">
+              <h3>Profesionales y estudios</h3>
+              <p>
+                Estudios contables, abogados, consultores, arquitectos y otros
+                perfiles que necesitan verse más claros y profesionales.
+              </p>
+            </article>
+
+            <article class="fit-card reveal">
+              <h3>Negocios locales</h3>
+              <p>
+                Comercios y marcas que ya tienen presencia digital, pero no una
+                estructura ordenada para captar y responder consultas.
+              </p>
+            </article>
+
+            <article class="fit-card reveal">
+              <h3>Centros y estética</h3>
+              <p>
+                Clínicas, consultorios, centros estéticos y negocios que
+                trabajan por turnos, consultas previas o derivaciones.
+              </p>
+            </article>
+
+            <article class="fit-card reveal">
+              <h3>Inmobiliarias y rubros comerciales</h3>
+              <p>
+                Negocios que reciben consultas frecuentes y necesitan
+                centralizar mejor la atención para no perder oportunidades.
+              </p>
+            </article>
+
+            <article class="fit-card reveal">
+              <h3>Negocios que quieren ordenar su venta</h3>
+              <p>
+                Si hoy tus consultas llegan por distintos canales y todo depende
+                de responder manualmente, este sistema puede servirte.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="planes">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Planes de implementación</h2>
+            <p>
+              Los planes funcionan como referencia clara según el nivel de
+              estructura, automatización y seguimiento que necesite tu negocio.
+            </p>
+          </div>
+
+          <div class="pricing">
+            <article class="plan reveal">
+              <span class="pill">Inicial</span>
+              <h3>Sistema Inicial</h3>
+              <p class="plan-copy">
+                Para negocios que necesitan empezar con una estructura simple y
+                profesional.
+              </p>
+              <p
+                style="
+                  margin: 16px 0 14px;
+                  color: var(--muted);
+                  font-weight: 600;
+                "
+              >
+                Implementación definida según el tipo de negocio y necesidad.
+              </p>
+              <ul class="list">
+                <li>Landing simple</li>
+                <li>Botón directo a WhatsApp</li>
+                <li>Integración básica con Instagram y Facebook</li>
+                <li>Google Business configurado</li>
+                <li>Estructura inicial de captación</li>
+              </ul>
+              <button
+                class="btn btn-secondary open-contact-modal"
+                type="button"
+              >
+                Quiero conocer este plan
+              </button>
+            </article>
+
+            <article class="plan featured reveal">
+              <span class="pill">Más elegido</span>
+              <h3>Sistema Profesional</h3>
+              <p class="plan-copy">
+                La mejor opción para negocios que quieren captar mejor,
+                responder más rápido y ordenar sus consultas de forma
+                profesional.
+              </p>
+              <p
+                style="
+                  margin: 16px 0 14px;
+                  color: var(--muted);
+                  font-weight: 600;
+                "
+              >
+                Implementación definida según el tipo de negocio y necesidad.
+              </p>
+              <ul class="list">
+                <li>Landing optimizada para conversión</li>
+                <li>Automatización inicial de WhatsApp</li>
+                <li>Automatización inicial de Instagram y Facebook</li>
+                <li>
+                  Creación de emails corporativos básicos (ej:
+                  contacto@tudominio.com)
+                </li>
+                <li>Google Business optimizado</li>
+                <li>Captura de leads</li>
+                <li>Seguimiento comercial básico</li>
+              </ul>
+              <button class="btn btn-primary open-contact-modal" type="button">
+                Quiero conocer este plan
+              </button>
+            </article>
+
+            <article class="plan reveal">
+              <span class="pill">Full</span>
+              <h3>Arquitectura de Ventas</h3>
+              <p class="plan-copy">
+                Para negocios que necesitan una estructura más completa para
+                captar, responder, hacer seguimiento y crecer con más control.
+              </p>
+              <p
+                style="
+                  margin: 16px 0 14px;
+                  color: var(--muted);
+                  font-weight: 600;
+                "
+              >
+                Implementación definida según el tipo de negocio y necesidad.
+              </p>
+              <ul class="list">
+                <li>Todo lo del Sistema Profesional</li>
+                <li>Automatización más avanzada de WhatsApp</li>
+                <li>Automatización más avanzada de Instagram y Facebook</li>
+                <li>
+                  Creación e integración de emails corporativos dentro del
+                  sistema comercial
+                </li>
+                <li>Seguimiento de consultas</li>
+                <li>Organización más completa de leads</li>
+                <li>Sistema preparado para mayor volumen</li>
+                <li>Dashboard inicial de seguimiento</li>
+              </ul>
+              <button
+                class="btn btn-secondary open-contact-modal"
+                type="button"
+              >
+                Quiero conocer este plan
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="container">
+          <div class="section-head reveal">
+            <h2>Preguntas frecuentes</h2>
+          </div>
+
+          <div class="faq-grid">
+            <article class="faq-item reveal">
+              <h3>¿Esto es solo una página web?</h3>
+              <p>
+                No. La landing es una parte. El foco está en ordenar la
+                captación, el primer contacto, la automatización y el
+                seguimiento comercial.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>¿También se puede automatizar Instagram y Facebook?</h3>
+              <p>
+                Sí. Según el plan, también podemos integrar y automatizar el
+                primer contacto en Instagram y Facebook para responder mejor y
+                ordenar las consultas.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>¿Puedo empezar con algo simple?</h3>
+              <p>
+                Sí. La idea es que arranques con una base sólida y después
+                escales automatizaciones y seguimiento si hace falta.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>¿Necesito tener todo armado antes?</h3>
+              <p>
+                No. Podemos trabajar desde cero o mejorar lo que ya tengas,
+                según el punto en el que esté tu negocio.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>¿Qué necesito para empezar?</h3>
+              <p>
+                En general necesitamos información básica de tu negocio, logo si
+                lo tenés, fotos, servicios principales y tus canales de contacto
+                actuales. Si no tenés todo armado, igual podemos avanzar desde
+                una base simple.
+              </p>
+            </article>
+
+            <article class="faq-item reveal">
+              <h3>¿Tengo que saber de tecnología para usarlo?</h3>
+              <p>
+                No. El sistema está pensado para que tu negocio trabaje con más
+                claridad y orden, sin que tengas que entender cuestiones
+                técnicas para poder usarlo.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto">
+        <div class="container">
+          <div class="contact-simple">
+            <article class="contact-panel reveal">
+              <div class="mini-title">Hablemos de tu negocio</div>
+              <h2>
+                Si querés más orden, más consultas y una presencia digital más
+                seria, empecemos.
+              </h2>
+              <p>
+                Podés completar el diagnóstico digital o escribirnos por
+                WhatsApp. En ambos casos vamos a orientarte según el tipo de
+                sistema que mejor se adapte a tu negocio.
+              </p>
+
+              <div class="contact-actions">
+                <a
+                  class="btn btn-primary"
+                  href="https://forms.gle/HuyrDpCGwwkqLSzL6"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Solicitar diagnóstico digital
+                </a>
+                <button
+                  class="btn btn-secondary open-contact-modal"
+                  type="button"
+                >
+                  Hablar por WhatsApp
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <span>© <span id="year"></span> Tracción Digital</span>
+        <span>Sistemas digitales para conseguir clientes</span>
+      </div>
+    </footer>
+
+    <button
+      class="floating-wa open-contact-modal"
+      type="button"
+      aria-label="Abrir WhatsApp"
+    >
+      <span class="floating-wa-icon">💬</span>
+      <span>WhatsApp</span>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal" id="contactModal" aria-hidden="true">
+      <div class="modal-backdrop" data-close-modal></div>
+
+      <div
+        class="modal-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <button class="modal-close" type="button" data-close-modal>✕</button>
+
+        <h2 class="modal-title" id="modalTitle">
+          Antes de abrir WhatsApp, contanos brevemente sobre tu negocio
+        </h2>
+
+        <p class="modal-subtext">
+          Así la conversación se abre con contexto real de tu negocio y podemos
+          orientarte mejor desde el primer mensaje.
+        </p>
+
+        <form id="modalWhatsappForm" class="modal-form">
+          <div class="field">
+            <label for="modalNombre">Nombre</label>
+            <input
+              id="modalNombre"
+              name="nombre"
+              type="text"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="modalNegocio">Negocio o rubro</label>
+            <input
+              id="modalNegocio"
+              name="negocio"
+              type="text"
+              placeholder="Ej. estudio contable, limpieza, estética"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="modalEmail">Email</label>
+            <input
+              id="modalEmail"
+              name="email"
+              type="email"
+              placeholder="tunombre@email.com"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="modalTelefono">WhatsApp</label>
+            <input
+              id="modalTelefono"
+              name="telefono"
+              type="tel"
+              placeholder="Tu número"
+            />
+          </div>
+
+          <div class="field">
+            <label for="modalMensaje">Qué necesitás</label>
+            <textarea
+              id="modalMensaje"
+              name="mensaje"
+              placeholder="Contanos brevemente qué necesitás o en qué situación está hoy tu negocio"
+            ></textarea>
+          </div>
+
+          <button class="btn btn-primary" type="submit">
+            Continuar por WhatsApp
+          </button>
+
+          <p class="modal-note">Se abrirá WhatsApp con tu mensaje ya armado.</p>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.12 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => observer.observe(el));
+
+      const modal = document.getElementById("contactModal");
+      const openModalButtons = document.querySelectorAll(".open-contact-modal");
+      const closeModalButtons = document.querySelectorAll("[data-close-modal]");
+      const modalForm = document.getElementById("modalWhatsappForm");
+
+      function openModal() {
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("modal-open");
+        setTimeout(() => {
+          const firstInput = document.getElementById("modalNombre");
+          if (firstInput) firstInput.focus();
+        }, 50);
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("modal-open");
+      }
+
+      openModalButtons.forEach((button) => {
+        button.addEventListener("click", openModal);
+      });
+
+      closeModalButtons.forEach((button) => {
+        button.addEventListener("click", closeModal);
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("active")) {
+          closeModal();
+        }
+      });
+
+      if (modalForm) {
+        modalForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const nombre = document.getElementById("modalNombre").value.trim();
+          const negocio = document.getElementById("modalNegocio").value.trim();
+          const email = document.getElementById("modalEmail").value.trim();
+          const telefono = document
+            .getElementById("modalTelefono")
+            .value.trim();
+          const mensaje = document.getElementById("modalMensaje").value.trim();
+
+          if (!nombre || !negocio || !email) {
+            alert("Completá al menos nombre, negocio y email.");
+            return;
+          }
+
+          const texto = [
+            "Hola, quiero conocer qué sistema digital me conviene para mi negocio.",
+            "",
+            "Nombre: " + nombre,
+            "Negocio o rubro: " + negocio,
+            "Email: " + email,
+            telefono ? "WhatsApp: " + telefono : null,
+            mensaje ? "Situación o necesidad: " + mensaje : null,
+          ]
+            .filter(Boolean)
+            .join("\n");
+
+          const url =
+            "https://wa.me/5491178262848?text=" + encodeURIComponent(texto);
+
+          window.open(url, "_blank");
+          closeModal();
+        });
+      }
+    </script>
+  </body>
+</html>
