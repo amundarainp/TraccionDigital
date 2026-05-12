@@ -1604,13 +1604,20 @@
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
 
+      const WEBHOOK_URL =
+        "https://hook.us2.make.com/4bdvwvy4hhchb87ss24sr5stpu9kudk1";
+
       function openModal() {
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
         document.body.classList.add("modal-open");
+
         setTimeout(() => {
           const firstInput = document.getElementById("modalNombre");
-          if (firstInput) firstInput.focus();
+
+          if (firstInput) {
+            firstInput.focus();
+          }
         }, 50);
       }
 
@@ -1635,19 +1642,36 @@
       });
 
       if (modalForm) {
-        modalForm.addEventListener("submit", function (event) {
+        modalForm.addEventListener("submit", async function (event) {
           event.preventDefault();
 
+          const submitButton = modalForm.querySelector('button[type="submit"]');
+
+          if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Abriendo WhatsApp...";
+          }
+
           const nombre = document.getElementById("modalNombre").value.trim();
+
           const negocio = document.getElementById("modalNegocio").value.trim();
+
           const email = document.getElementById("modalEmail").value.trim();
+
           const telefono = document
             .getElementById("modalTelefono")
             .value.trim();
+
           const mensaje = document.getElementById("modalMensaje").value.trim();
 
           if (!nombre || !negocio || !email) {
             alert("Completá al menos nombre, negocio y email.");
+
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = "Continuar por WhatsApp";
+            }
+
             return;
           }
 
@@ -1666,8 +1690,42 @@
           const url =
             "https://wa.me/5491178262848?text=" + encodeURIComponent(texto);
 
-          window.open(url, "_blank");
-          closeModal();
+          const payload = {
+            nombre,
+            negocio,
+            email,
+            telefono,
+            mensaje,
+            texto,
+            whatsappUrl: url,
+            origen: "td_landing_captura_v1",
+            fechaIso: new Date().toISOString(),
+          };
+
+          try {
+            console.log("ENVIANDO WEBHOOK", payload);
+
+            const response = await fetch(WEBHOOK_URL, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(payload),
+            });
+
+            console.log("WEBHOOK RESPUESTA", response.status);
+          } catch (error) {
+            console.error("ERROR EN ENVÍO WEBHOOK", error);
+          } finally {
+            window.open(url, "_blank", "noopener");
+
+            closeModal();
+
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = "Continuar por WhatsApp";
+            }
+          }
         });
       }
     </script>
