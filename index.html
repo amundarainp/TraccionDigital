@@ -1604,8 +1604,11 @@
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
 
+      const LANDING_VERSION = "2026-05-12-webhook-fix-v1";
       const WEBHOOK_URL =
-          "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
+        "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
+
+      console.info("TRACCION DIGITAL BUILD", LANDING_VERSION);
 
       function openModal() {
         modal.classList.add("active");
@@ -1699,6 +1702,7 @@
             texto,
             whatsappUrl: url,
             origen: "td_landing_captura_v1",
+            landingVersion: LANDING_VERSION,
             fechaIso: new Date().toISOString(),
           };
 
