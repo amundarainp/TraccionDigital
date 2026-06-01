@@ -1870,31 +1870,47 @@
         document.body.classList.remove("modal-open");
       }
 
-      function normalizeWhatsappPhone(rawPhone, selectedCountryCode) {
-        const input = (rawPhone || "").trim();
+      function normalizarTelefonoParaCrm(telefonoRaw, codigoPais) {
+        const numeroLimpio = (telefonoRaw || "").replace(/\D/g, "");
+        const codigoPaisLimpio = (codigoPais || "").replace(/\D/g, "");
 
-        if (!input) {
+        if (!numeroLimpio) {
           return "";
         }
 
-        if (input.startsWith("+")) {
-          const intlDigits = input.slice(1).replace(/\D/g, "");
-          return intlDigits ? `+${intlDigits}` : "";
+        if (!codigoPaisLimpio) {
+          return numeroLimpio;
         }
 
-        const localDigits = input.replace(/\D/g, "");
+        if (codigoPaisLimpio === "54") {
+          if (numeroLimpio.startsWith("549")) {
+            return numeroLimpio;
+          }
 
-        if (!localDigits) {
-          return "";
+          let numeroArgentina = numeroLimpio;
+
+          if (numeroArgentina.startsWith("54")) {
+            numeroArgentina = numeroArgentina.slice(2);
+          }
+
+          numeroArgentina = numeroArgentina.replace(/^0+/, "");
+
+          if (!numeroArgentina) {
+            return "";
+          }
+
+          if (numeroArgentina.startsWith("9")) {
+            return `54${numeroArgentina}`;
+          }
+
+          return `549${numeroArgentina}`;
         }
 
-        const countryCodeDigits = (selectedCountryCode || "").replace(/\D/g, "");
-
-        if (!countryCodeDigits) {
-          return `+${localDigits}`;
+        if (numeroLimpio.startsWith(codigoPaisLimpio)) {
+          return numeroLimpio;
         }
 
-        return `+${countryCodeDigits}${localDigits}`;
+        return `${codigoPaisLimpio}${numeroLimpio}`;
       }
 
       openModalButtons.forEach((button) => {
@@ -1935,7 +1951,7 @@
             .getElementById("modalTelefono")
             .value.trim();
 
-          const telefonoNormalizado = normalizeWhatsappPhone(
+          const telefonoNormalizado = normalizarTelefonoParaCrm(
             telefono,
             telefonoPais,
           );
