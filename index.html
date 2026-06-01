@@ -844,6 +844,18 @@
         color: #97a0ae;
       }
 
+      .phone-group {
+        display: grid;
+        grid-template-columns: 170px 1fr;
+        gap: 10px;
+      }
+
+      .phone-hint {
+        margin-top: 4px;
+        font-size: 0.84rem;
+        color: #97a0ae;
+      }
+
       @media (max-width: 1024px) {
         .hero-grid,
         .cards-3,
@@ -920,6 +932,10 @@
 
         .modal-dialog {
           padding: 22px 18px 18px;
+        }
+
+        .phone-group {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -1762,12 +1778,28 @@
 
           <div class="field">
             <label for="modalTelefono">WhatsApp</label>
-            <input
-              id="modalTelefono"
-              name="telefono"
-              type="tel"
-              placeholder="Tu número"
-            />
+            <div class="phone-group">
+              <select id="modalTelefonoPais" name="telefonoPais">
+                <option value="54" selected>Argentina (+54)</option>
+                <option value="598">Uruguay (+598)</option>
+                <option value="56">Chile (+56)</option>
+                <option value="34">España (+34)</option>
+                <option value="52">México (+52)</option>
+                <option value="57">Colombia (+57)</option>
+                <option value="51">Perú (+51)</option>
+              </select>
+              <input
+                id="modalTelefono"
+                name="telefono"
+                type="tel"
+                placeholder="Área + número (sin 0 ni 15)"
+                inputmode="tel"
+                autocomplete="tel"
+              />
+            </div>
+            <p class="phone-hint">
+              Se enviará normalizado al webhook en formato internacional: +xxxxxxxxxxx
+            </p>
           </div>
 
           <div class="field">
@@ -1837,6 +1869,41 @@
         document.body.classList.remove("modal-open");
       }
 
+      function normalizeWhatsappPhone(rawPhone, selectedCountryCode) {
+        const input = (rawPhone || "").trim();
+
+        if (!input) {
+          return "";
+        }
+
+        if (input.startsWith("+")) {
+          const intlDigits = input.slice(1).replace(/\D/g, "");
+          return intlDigits ? `+${intlDigits}` : "";
+        }
+
+        let localDigits = input.replace(/\D/g, "");
+
+        if (!localDigits) {
+          return "";
+        }
+
+        localDigits = localDigits.replace(/^0+/, "");
+
+        if (selectedCountryCode === "54") {
+          localDigits = localDigits.replace(/^(\d{2,4})15(\d{6,8})$/, "$1$2");
+        }
+
+        if (!localDigits) {
+          return "";
+        }
+
+        if (localDigits.startsWith(selectedCountryCode)) {
+          return `+${localDigits}`;
+        }
+
+        return `+${selectedCountryCode}${localDigits}`;
+      }
+
       openModalButtons.forEach((button) => {
         button.addEventListener("click", openModal);
       });
@@ -1868,14 +1935,35 @@
 
           const email = document.getElementById("modalEmail").value.trim();
 
+          const telefonoPais =
+            document.getElementById("modalTelefonoPais").value;
+
           const telefono = document
             .getElementById("modalTelefono")
             .value.trim();
+
+          const telefonoNormalizado = normalizeWhatsappPhone(
+            telefono,
+            telefonoPais,
+          );
 
           const mensaje = document.getElementById("modalMensaje").value.trim();
 
           if (!nombre || !negocio || !email) {
             alert("Completá al menos nombre, negocio y email.");
+
+            if (submitButton) {
+              submitButton.disabled = false;
+              submitButton.textContent = "Continuar por WhatsApp";
+            }
+
+            return;
+          }
+
+          if (telefono && !telefonoNormalizado) {
+            alert(
+              "Revisá el WhatsApp. Debe poder normalizarse al formato internacional (+xxxxxxxxxxx).",
+            );
 
             if (submitButton) {
               submitButton.disabled = false;
@@ -1891,7 +1979,7 @@
             "Nombre: " + nombre,
             "Negocio o rubro: " + negocio,
             "Email: " + email,
-            telefono ? "WhatsApp: " + telefono : null,
+            telefonoNormalizado ? "WhatsApp: " + telefonoNormalizado : null,
             mensaje ? "Situación o necesidad: " + mensaje : null,
           ]
             .filter(Boolean)
@@ -1904,7 +1992,9 @@
             nombre,
             negocio,
             email,
-            telefono,
+            telefono: telefonoNormalizado,
+            telefonoOriginal: telefono,
+            telefonoPais,
             mensaje,
             texto,
             whatsappUrl: url,
