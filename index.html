@@ -1882,45 +1882,19 @@
           return intlDigits ? `+${intlDigits}` : "";
         }
 
-        let localDigits = input.replace(/\D/g, "");
+        const localDigits = input.replace(/\D/g, "");
 
         if (!localDigits) {
           return "";
         }
 
-        localDigits = localDigits.replace(/^0+/, "");
+        const countryCodeDigits = (selectedCountryCode || "").replace(/\D/g, "");
 
-        if (selectedCountryCode === "54") {
-          if (localDigits.startsWith("54")) {
-            localDigits = localDigits.slice(2);
-          }
-
-          localDigits = localDigits.replace(/^0+/, "");
-
-          if (!localDigits) {
-            return "";
-          }
-
-          if (localDigits.startsWith("9") && localDigits.length >= 11) {
-            return `+54${localDigits}`;
-          }
-
-          if (localDigits.length === 10) {
-            return `+549${localDigits}`;
-          }
-
-          return `+54${localDigits}`;
-        }
-
-        if (!localDigits) {
-          return "";
-        }
-
-        if (localDigits.startsWith(selectedCountryCode)) {
+        if (!countryCodeDigits) {
           return `+${localDigits}`;
         }
 
-        return `+${selectedCountryCode}${localDigits}`;
+        return `+${countryCodeDigits}${localDigits}`;
       }
 
       openModalButtons.forEach((button) => {
