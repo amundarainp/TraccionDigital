@@ -596,6 +596,135 @@
         width: min(100%, 360px);
       }
 
+      .ecosystem-section {
+        padding-top: 30px;
+      }
+
+      .ecosystem-shell {
+        padding: 34px;
+        border-radius: var(--radius-xl);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background:
+          radial-gradient(
+            circle at 88% 2%,
+            rgba(215, 180, 106, 0.13),
+            transparent 34%
+          ),
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.042),
+            rgba(255, 255, 255, 0.02)
+          );
+      }
+
+      .ecosystem-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+        align-items: stretch;
+      }
+
+      .ecosystem-card {
+        position: relative;
+        padding: 30px;
+        border-radius: var(--radius-lg);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          rgba(255, 255, 255, 0.032)
+        );
+        transition:
+          transform 0.25s ease,
+          border-color 0.25s ease,
+          box-shadow 0.25s ease;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .ecosystem-card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(215, 180, 106, 0.32);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+      }
+
+      .ecosystem-card-brand::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 180px;
+        height: 160px;
+        border-top-right-radius: var(--radius-lg);
+        border-bottom-left-radius: 70px;
+        background: radial-gradient(
+          circle at 100% 0%,
+          rgba(240, 203, 132, 0.18),
+          rgba(194, 112, 72, 0.08),
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .ecosystem-card-demo {
+        border-color: rgba(215, 180, 106, 0.2);
+        background: linear-gradient(
+          180deg,
+          rgba(215, 180, 106, 0.09),
+          rgba(255, 255, 255, 0.03)
+        );
+      }
+
+      .ecosystem-label {
+        display: inline-flex;
+        width: fit-content;
+        min-height: 30px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(215, 180, 106, 0.2);
+        background: rgba(215, 180, 106, 0.1);
+        color: var(--accent-2);
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        font-size: 0.74rem;
+        font-weight: 900;
+      }
+
+      .ecosystem-title {
+        font-size: clamp(1.48rem, 2.3vw, 1.95rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+      }
+
+      .ecosystem-subtitle {
+        color: var(--text);
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .ecosystem-copy {
+        color: var(--muted);
+        max-width: 56ch;
+      }
+
+      .ecosystem-actions {
+        margin-top: auto;
+        padding-top: 6px;
+      }
+
+      .ecosystem-note {
+        margin-top: 16px;
+        color: #9ba4b2;
+        font-size: 0.9rem;
+      }
+
+      .ecosystem-accent {
+        color: var(--accent-2);
+      }
+
       .footer {
         padding: 64px 0 32px;
         color: var(--muted);
@@ -605,7 +734,7 @@
 
       .footer-inner {
         display: grid;
-        grid-template-columns: 1.4fr 1fr 1fr;
+        grid-template-columns: 1.2fr 1fr 1fr 1fr;
         gap: 48px;
       }
 
@@ -869,8 +998,17 @@
           grid-template-columns: 1fr;
         }
 
+        .ecosystem-grid {
+          grid-template-columns: 1fr;
+        }
+
         .pricing {
           grid-template-columns: 1fr;
+        }
+
+        .footer-inner {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 32px;
         }
 
         .nav {
@@ -918,6 +1056,23 @@
           grid-template-columns: 1fr;
         }
 
+        .ecosystem-shell {
+          padding: 24px 18px;
+        }
+
+        .ecosystem-card {
+          padding: 24px 20px;
+        }
+
+        .ecosystem-actions .btn {
+          width: 100%;
+        }
+
+        .footer-inner {
+          grid-template-columns: 1fr;
+          gap: 36px;
+        }
+
         .system-item {
           grid-template-columns: 1fr;
         }
@@ -956,6 +1111,7 @@
           <a href="#automatizacion">Automatización</a>
           <a href="#proceso">Proceso</a>
           <a href="#planes">Planes</a>
+          <a href="#ecosistema">Ecosistema</a>
           <a href="#contacto">Contacto</a>
         </nav>
       </div>
@@ -1484,6 +1640,84 @@
         </div>
       </section>
 
+      <section id="ecosistema" class="ecosystem-section">
+        <div class="container">
+          <div class="ecosystem-shell reveal">
+            <div class="section-head reveal">
+              <div class="mini-title">ECOSISTEMA TRACCIÓN DIGITAL</div>
+              <h2>
+                También desarrollamos y operamos proyectos digitales propios.
+              </h2>
+              <p>
+                Tracción Digital no solo construye sistemas para otros negocios.
+                También crea y gestiona unidades de negocio propias, aplicando
+                la misma combinación de estrategia, diseño, automatización y
+                experiencia digital.
+              </p>
+            </div>
+
+            <div class="ecosystem-grid">
+              <article class="ecosystem-card ecosystem-card-brand reveal">
+                <span class="ecosystem-label">UNIDAD DE NEGOCIO TD</span>
+                <h3 class="ecosystem-title">Amor en Páginas</h3>
+                <p class="ecosystem-copy">
+                  Experiencias digitales personalizadas para transformar
+                  historias, recuerdos y momentos importantes en regalos que se
+                  pueden volver a vivir.
+                </p>
+                <p class="ecosystem-copy">
+                  Una propuesta creada y gestionada dentro del ecosistema de
+                  <span class="ecosystem-accent">Tracción Digital</span>.
+                </p>
+
+                <div class="ecosystem-actions">
+                  <a
+                    class="btn btn-primary"
+                    href="https://amorenpaginas.com.ar/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Conocer Amor en Páginas
+                  </a>
+                </div>
+              </article>
+
+              <article class="ecosystem-card ecosystem-card-demo reveal">
+                <span class="ecosystem-label">EXPERIENCIA DESTACADA</span>
+                <h3 class="ecosystem-title">Fin de año empresarial</h3>
+                <p class="ecosystem-subtitle">
+                  Un cierre de año que el equipo puede volver a vivir.
+                </p>
+                <p class="ecosystem-copy">
+                  Una experiencia digital creada para reunir los momentos más
+                  importantes del año: logros, personas, fotografías, mensajes,
+                  reconocimientos y recuerdos compartidos.
+                </p>
+                <p class="ecosystem-copy">
+                  Más que una presentación o una galería, es un espacio propio
+                  para celebrar el recorrido de toda la organización.
+                </p>
+
+                <div class="ecosystem-actions">
+                  <a
+                    class="btn btn-primary"
+                    href="https://amorenpaginas.com.ar/EJEMPLOS%20PARA%20LEADS/COMBO%20ESPECIAL/Combo%20Especial%20-%20Empresa%20-%20Despedida%20de%20Fin%20de%20A%C3%B1o/demo-lead-combo-especial-agresiva-lujo.html"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Ver experiencia empresarial
+                  </a>
+                  <p class="ecosystem-note">
+                    Una experiencia creada por Amor en Páginas dentro del
+                    ecosistema Tracción Digital.
+                  </p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="faq">
         <div class="container">
           <div class="section-head reveal">
@@ -1688,6 +1922,77 @@
                     />
                   </svg>
                   tracciondigital.ok
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="footer-col">
+            <h4>Ecosistema</h4>
+            <ul>
+              <li>
+                <a
+                  href="https://amorenpaginas.com.ar/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Amor en Páginas
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://amorenpaginas.com.ar/EJEMPLOS%20PARA%20LEADS/COMBO%20ESPECIAL/Combo%20Especial%20-%20Empresa%20-%20Despedida%20de%20Fin%20de%20A%C3%B1o/demo-lead-combo-especial-agresiva-lujo.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Experiencia empresarial
+                </a>
+              </li>
+            </ul>
+            <h4>Seguí AEP</h4>
+            <ul>
+              <li>
+                <a
+                  href="https://www.instagram.com/amor.en.paginas/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram de Amor en Páginas"
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                  @amor.en.paginas
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61584007112285"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook de Amor en Páginas"
+                >
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"
+                    />
+                  </svg>
+                  Amor en Páginas
                 </a>
               </li>
             </ul>
