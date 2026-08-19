@@ -95,46 +95,93 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        backdrop-filter: blur(14px);
-        background: rgba(11, 15, 22, 0.74);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        background: rgba(8, 12, 18, 0.86);
+        border-bottom: 1px solid rgba(216, 181, 107, 0.14);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
       }
 
       .header-inner {
+        position: relative;
+        min-height: 78px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        min-height: 82px;
+        gap: 22px;
       }
 
       .brand {
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        font-weight: 800;
-        letter-spacing: -0.01em;
+        gap: 13px;
         flex-shrink: 0;
       }
 
-      .brand-logo {
-        display: block;
-        height: 60px;
-        width: auto;
-        max-width: none;
-        filter: brightness(1.6) contrast(1.4);
+      .brand-mark {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        object-fit: cover;
+        box-shadow:
+          0 0 0 1px rgba(216, 181, 107, 0.22),
+          0 10px 28px rgba(0, 0, 0, 0.4);
+      }
+
+      .brand-copy {
+        display: grid;
+        gap: 3px;
+        line-height: 1;
+      }
+
+      .brand-name {
+        font-size: 1.06rem;
+        font-weight: 850;
+        letter-spacing: 0.052em;
+      }
+
+      .brand-tagline {
+        color: var(--accent);
+        font-size: 0.67rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
       }
 
       .nav {
+        margin-left: auto;
         display: flex;
         align-items: center;
-        gap: 26px;
+        gap: 22px;
         color: var(--muted);
-        font-size: 0.97rem;
+        font-size: 0.92rem;
       }
 
       .nav a:hover {
         color: var(--text);
+      }
+
+      .header-cta {
+        min-height: 42px;
+        padding: 0 17px;
+        font-size: 0.86rem;
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        cursor: pointer;
+        place-items: center;
+        margin-left: auto;
+      }
+
+      .menu-toggle svg {
+        width: 20px;
+        height: 20px;
       }
 
       .btn {
@@ -1070,6 +1117,38 @@
           display: none;
         }
 
+        .header-cta {
+          display: none;
+        }
+
+        .menu-toggle {
+          display: grid;
+        }
+
+        .nav.active {
+          position: absolute;
+          top: calc(100% + 10px);
+          right: 0;
+          z-index: 110;
+          width: min(320px, calc(100vw - 32px));
+          padding: 14px;
+          display: grid;
+          gap: 4px;
+          border: 1px solid rgba(216, 181, 107, 0.18);
+          border-radius: 16px;
+          background: rgba(8, 12, 18, 0.98);
+          box-shadow: 0 18px 44px rgba(0, 0, 0, 0.38);
+        }
+
+        .nav.active a {
+          padding: 11px 12px;
+          border-radius: 10px;
+        }
+
+        .nav.active a:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+
         h1 {
           max-width: 100%;
         }
@@ -1080,14 +1159,28 @@
       }
 
       @media (max-width: 640px) {
-        .brand-logo {
-          height: 48px;
-          width: auto;
-          max-width: none;
+        .header-inner {
+          min-height: 68px;
         }
 
-        .header-inner {
-          min-height: 72px;
+        .brand-mark {
+          width: 46px;
+          height: 46px;
+          border-radius: 12px;
+        }
+
+        .brand {
+          gap: 11px;
+        }
+
+        .brand-name {
+          font-size: 0.94rem;
+          letter-spacing: 0.04em;
+        }
+
+        .brand-tagline {
+          font-size: 0.56rem;
+          letter-spacing: 0.13em;
         }
 
         .hero {
@@ -1153,15 +1246,15 @@
   <body>
     <header class="header">
       <div class="container header-inner">
-        <a href="#inicio" class="brand">
-          <img
-            class="brand-logo"
-            src="TD_Logo_Compacto_ArquitecturaVentas_Dark.png"
-            alt="Tracción Digital"
-          />
+        <a class="brand" href="#inicio" aria-label="Tracción Digital · Inicio">
+          <img class="brand-mark" src="TD_Favicon_Simplificado.png" alt="" width="52" height="52" />
+          <span class="brand-copy">
+            <span class="brand-name">TRACCIÓN DIGITAL</span>
+            <span class="brand-tagline">Arquitectura de Ventas</span>
+          </span>
         </a>
 
-        <nav class="nav">
+        <nav class="nav" id="mainNav" aria-label="Navegación principal">
           <a href="#solucion">Solución</a>
           <a href="#automatizacion">Automatización</a>
           <a href="#proceso">Proceso</a>
@@ -1169,6 +1262,14 @@
           <a href="#ecosistema">Ecosistema</a>
           <a href="#contacto">Contacto</a>
         </nav>
+
+        <a class="btn btn-primary header-cta" href="#contacto">Solicitar diagnóstico</a>
+
+        <button class="menu-toggle" id="menuToggle" type="button" aria-label="Abrir menú" aria-controls="mainNav" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
       </div>
     </header>
 
@@ -2208,6 +2309,25 @@
       const openModalButtons = document.querySelectorAll(".open-contact-modal");
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
+
+      const menuToggle = document.getElementById("menuToggle");
+      const mainNav = document.getElementById("mainNav");
+
+      if (menuToggle && mainNav) {
+        menuToggle.addEventListener("click", () => {
+          const isOpen = mainNav.classList.toggle("active");
+          menuToggle.setAttribute("aria-expanded", String(isOpen));
+          menuToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
+        });
+
+        mainNav.querySelectorAll("a").forEach((link) => {
+          link.addEventListener("click", () => {
+            mainNav.classList.remove("active");
+            menuToggle.setAttribute("aria-expanded", "false");
+            menuToggle.setAttribute("aria-label", "Abrir menú");
+          });
+        });
+      }
 
       const LANDING_VERSION = "2026-08-19-phone-required-v1";
       const WEBHOOK_URL =
