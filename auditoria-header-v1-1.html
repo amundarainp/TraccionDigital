@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="theme-color" content="#0b0f16" />
+  <title>Tracción Digital · Header v1.1</title>
+  <link rel="icon" type="image/png" href="TD_Favicon_Simplificado.png" />
+  <style>
+    :root{--bg:#090d13;--bg2:#101722;--text:#f6f7fb;--muted:#aeb7c5;--gold:#d8b56b;--gold2:#f1ce88;--line:rgba(255,255,255,.09);--ink:#101010;--container:1180px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{min-height:100vh;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--text);line-height:1.55;background:radial-gradient(circle at 12% -5%,rgba(216,181,107,.15),transparent 27%),radial-gradient(circle at 96% 6%,rgba(216,181,107,.07),transparent 23%),linear-gradient(180deg,var(--bg),var(--bg2) 58%,var(--bg))}
+    a{color:inherit;text-decoration:none}
+    .container{width:min(calc(100% - 32px),var(--container));margin:0 auto}
+    .header{position:sticky;top:0;z-index:50;background:rgba(8,12,18,.86);border-bottom:1px solid rgba(216,181,107,.14);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 12px 34px rgba(0,0,0,.18)}
+    .header-inner{position:relative;min-height:78px;display:flex;align-items:center;gap:22px}
+    .brand{display:inline-flex;align-items:center;gap:13px;flex-shrink:0}
+    .brand-mark{width:52px;height:52px;border-radius:14px;object-fit:cover;box-shadow:0 0 0 1px rgba(216,181,107,.22),0 10px 28px rgba(0,0,0,.4)}
+    .brand-copy{display:grid;gap:3px;line-height:1}
+    .brand-name{font-size:1.06rem;font-weight:850;letter-spacing:.052em}
+    .brand-tagline{color:var(--gold);font-size:.67rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+    .nav{margin-left:auto;display:flex;align-items:center;gap:22px;color:var(--muted);font-size:.92rem}
+    .nav a:hover{color:var(--text)}
+    .btn{min-height:42px;padding:0 17px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;border:1px solid transparent;font-weight:800;font-size:.86rem;white-space:nowrap}
+    .btn-primary{color:var(--ink);background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 14px 30px rgba(216,181,107,.2)}
+    .menu-toggle{display:none;width:44px;height:44px;border-radius:13px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);cursor:pointer;place-items:center;margin-left:auto}
+    .menu-toggle svg{width:20px;height:20px}
+    .hero{padding:88px 0 76px}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:44px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid rgba(216,181,107,.18);background:rgba(216,181,107,.08);color:var(--gold2);font-size:.82rem;font-weight:800;margin-bottom:20px}
+    .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(216,181,107,.08)}
+    h1{max-width:12ch;font-size:clamp(3rem,6vw,5.5rem);line-height:.94;letter-spacing:-.058em;margin-bottom:22px}
+    .hero p{max-width:61ch;color:var(--muted);font-size:1.08rem}
+    .panel{padding:30px;border-radius:28px;border:1px solid rgba(216,181,107,.25);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.028));box-shadow:0 24px 70px rgba(0,0,0,.38)}
+    .panel small{display:block;color:var(--gold2);font-size:.75rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}.panel h2{font-size:2.15rem;line-height:1.03;letter-spacing:-.04em;margin-bottom:12px}.panel p{color:var(--muted)}
+    .compare-note{position:fixed;left:18px;bottom:18px;padding:10px 13px;border:1px solid rgba(216,181,107,.2);border-radius:12px;background:rgba(9,13,19,.92);color:var(--gold2);font-size:.82rem;box-shadow:0 12px 30px rgba(0,0,0,.3)}
+    @media(max-width:1024px){.hero-grid{grid-template-columns:1fr}.nav,.header-cta{display:none}.menu-toggle{display:grid}h1{max-width:14ch}}
+    @media(max-width:680px){.header-inner{min-height:68px}.brand-mark{width:46px;height:46px;border-radius:12px}.brand{gap:11px}.brand-name{font-size:.94rem;letter-spacing:.04em}.brand-tagline{font-size:.56rem;letter-spacing:.13em}.hero{padding:56px 0 60px}.compare-note{display:none}}
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <a class="brand" href="#inicio" aria-label="Tracción Digital · Inicio">
+        <img class="brand-mark" src="TD_Favicon_Simplificado.png" alt="" width="52" height="52" />
+        <span class="brand-copy">
+          <span class="brand-name">TRACCIÓN DIGITAL</span>
+          <span class="brand-tagline">Arquitectura de Ventas</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a><a href="#sistema">Sistema</a><a href="#mejoras">Mejoras</a><a href="#contacto">Contacto</a>
+      </nav>
+      <a class="btn btn-primary header-cta" href="#contacto">Solicitar diagnóstico</a>
+      <button class="menu-toggle" type="button" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </header>
+  <main id="inicio" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Sistemas digitales para negocios que quieren crecer</div>
+        <h1>Tu negocio necesita más que una página web.</h1>
+        <p>Diseñamos sistemas digitales para que tu negocio consiga más consultas, responda mejor y convierta esas consultas en clientes.</p>
+      </div>
+      <aside class="panel" id="sistema">
+        <small>Arquitectura de ventas</small>
+        <h2>Menos improvisación.<br />Más orden comercial.</h2>
+        <p>Una presencia digital coherente tiene que llevar al lead desde la consulta hasta el seguimiento sin depender de recordar cada paso manualmente.</p>
+      </aside>
+    </div>
+  </main>
+  <div class="compare-note">Header v1.1 · marca ampliada sin aumentar los 78 px del header</div>
+</body>
+</html>
