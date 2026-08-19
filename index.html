@@ -1046,6 +1046,18 @@
         margin-bottom: 18px;
       }
 
+      .modal-plan {
+        width: fit-content;
+        margin: -6px 0 18px;
+        padding: 7px 11px;
+        border: 1px solid rgba(215, 180, 106, 0.22);
+        border-radius: 999px;
+        background: rgba(215, 180, 106, 0.1);
+        color: var(--accent-2);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
       .modal-form {
         display: grid;
         gap: 14px;
@@ -1821,8 +1833,8 @@
               <button
                 class="btn btn-secondary open-contact-modal"
                 type="button"
-              >
-                Quiero conocer este plan
+              data-plan="Sistema Inicial">
+                Consultar Sistema Inicial
               </button>
             </article>
 
@@ -1855,8 +1867,8 @@
                 <li>Captura de leads</li>
                 <li>Seguimiento comercial básico</li>
               </ul>
-              <button class="btn btn-primary open-contact-modal" type="button">
-                Quiero conocer este plan
+              <button class="btn btn-primary open-contact-modal" type="button"data-plan="Sistema Profesional">
+                Consultar Sistema Profesional
               </button>
             </article>
 
@@ -1892,8 +1904,8 @@
               <button
                 class="btn btn-secondary open-contact-modal"
                 type="button"
-              >
-                Quiero conocer este plan
+              data-plan="Arquitectura de Ventas">
+                Consultar Arquitectura de Ventas
               </button>
             </article>
           </div>
@@ -2316,6 +2328,8 @@
           orientarte mejor desde el primer mensaje.
         </p>
 
+        <p class="modal-plan" id="modalPlan" hidden></p>
+
         <form id="modalWhatsappForm" class="modal-form">
           <div class="field">
             <label for="modalNombre">Nombre</label>
@@ -2418,8 +2432,12 @@
       const openModalButtons = document.querySelectorAll(".open-contact-modal");
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
+      const modalTitle = document.getElementById("modalTitle");
+      const modalDescription = document.getElementById("modalDescription");
+      const modalPlan = document.getElementById("modalPlan");
       const modalStatus = document.getElementById("modalStatus");
       let lastModalTrigger = null;
+      let selectedPlan = "";
 
       const menuToggle = document.getElementById("menuToggle");
       const mainNav = document.getElementById("mainNav");
@@ -2440,7 +2458,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-19-conversion-v2";
+      const LANDING_VERSION = "2026-08-19-plan-context-v3";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
@@ -2449,6 +2467,18 @@
       function openModal(trigger = null) {
         lastModalTrigger =
           trigger instanceof HTMLElement ? trigger : document.activeElement;
+        selectedPlan = trigger instanceof HTMLElement ? trigger.dataset.plan || "" : "";
+
+        if (modalTitle && modalDescription && modalPlan) {
+          modalTitle.textContent = selectedPlan
+            ? `Consultá por ${selectedPlan}`
+            : "Antes de abrir WhatsApp, contanos brevemente sobre tu negocio";
+          modalDescription.textContent = selectedPlan
+            ? "Contanos sobre tu negocio para orientarte y confirmar si este plan es el indicado para vos."
+            : "Así la conversación se abre con contexto real de tu negocio y podemos orientarte mejor desde el primer mensaje.";
+          modalPlan.textContent = selectedPlan ? `Plan de interés: ${selectedPlan}` : "";
+          modalPlan.hidden = !selectedPlan;
+        }
 
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
@@ -2632,6 +2662,7 @@
             "Negocio o rubro: " + negocio,
             "Email: " + email,
             "WhatsApp: " + telefonoNormalizado,
+            selectedPlan ? "Plan de interés: " + selectedPlan : null,
             mensaje ? "Situación o necesidad: " + mensaje : null,
           ]
             .filter(Boolean)
@@ -2648,6 +2679,7 @@
             telefono: telefonoNormalizado,
             telefonoOriginal: telefono,
             telefonoPais,
+            plan_interes: selectedPlan,
             mensaje,
             texto,
             whatsappUrl: url,
