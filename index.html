@@ -999,6 +999,47 @@
         color: #97a0ae;
       }
 
+      /* Hero v1.1: primera pantalla más equilibrada y completa */
+      @media (min-width: 1025px) {
+        .hero {
+          padding: 64px 0 68px;
+        }
+
+        h1 {
+          font-size: clamp(2.8rem, 5.3vw, 4.7rem);
+          max-width: 12ch;
+        }
+
+        .hero-card {
+          padding: 24px;
+        }
+
+        .metric-box {
+          gap: 10px;
+          margin: 16px 0 18px;
+        }
+
+        .metric {
+          padding: 14px;
+        }
+
+        .system-list {
+          gap: 10px;
+        }
+
+        .system-item {
+          grid-template-columns: 42px 1fr;
+          gap: 12px;
+          padding: 13px 14px;
+        }
+
+        .system-icon {
+          width: 42px;
+          height: 42px;
+          border-radius: 12px;
+        }
+      }
+
       @media (max-width: 1024px) {
         .hero-grid,
         .cards-3,
