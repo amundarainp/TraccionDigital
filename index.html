@@ -2096,7 +2096,7 @@
           <div class="field">
             <label for="modalTelefono">WhatsApp</label>
             <div class="phone-group">
-              <select id="modalTelefonoPais" name="telefonoPais">
+              <select id="modalTelefonoPais" name="telefonoPais" required>
                 <option value="54" selected>Argentina (+54)</option>
                 <option value="598">Uruguay (+598)</option>
                 <option value="56">Chile (+56)</option>
@@ -2112,6 +2112,7 @@
                 placeholder="Área + número (sin 0 ni 15)"
                 inputmode="tel"
                 autocomplete="tel"
+                required
               />
             </div>
             <p class="phone-hint">
@@ -2161,7 +2162,7 @@
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
 
-      const LANDING_VERSION = "2026-05-12-webhook-fix-v1";
+      const LANDING_VERSION = "2026-08-19-phone-required-v1";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
@@ -2275,8 +2276,8 @@
 
           const mensaje = document.getElementById("modalMensaje").value.trim();
 
-          if (!nombre || !negocio || !email) {
-            alert("Completá al menos nombre, negocio y email.");
+          if (!nombre || !negocio || !email || !telefono) {
+            alert("Completá nombre, negocio, email y WhatsApp.");
 
             if (submitButton) {
               submitButton.disabled = false;
@@ -2286,7 +2287,7 @@
             return;
           }
 
-          if (telefono && !telefonoNormalizado) {
+          if (!telefonoNormalizado) {
             alert(
               "Revisá el WhatsApp. Debe poder normalizarse al formato internacional (+xxxxxxxxxxx).",
             );
@@ -2305,7 +2306,7 @@
             "Nombre: " + nombre,
             "Negocio o rubro: " + negocio,
             "Email: " + email,
-            telefonoNormalizado ? "WhatsApp: " + telefonoNormalizado : null,
+            "WhatsApp: " + telefonoNormalizado,
             mensaje ? "Situación o necesidad: " + mensaje : null,
           ]
             .filter(Boolean)
