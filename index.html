@@ -113,6 +113,33 @@
         text-decoration: none;
       }
 
+      [id] {
+        scroll-margin-top: 96px;
+      }
+
+      :focus-visible {
+        outline: 3px solid var(--accent-2);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 500;
+        padding: 12px 16px;
+        border-radius: 10px;
+        background: var(--accent-2);
+        color: var(--dark);
+        font-weight: 800;
+        transform: translateY(-150%);
+        transition: transform 0.2s ease;
+      }
+
+      .skip-link:focus {
+        transform: translateY(0);
+      }
+
       img {
         max-width: 100%;
         display: block;
@@ -1296,6 +1323,7 @@
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#contenido-principal">Saltar al contenido</a>
     <header class="header">
       <div class="container header-inner">
         <a class="brand" href="#inicio" aria-label="Tracción Digital · Inicio">
@@ -1325,7 +1353,7 @@
       </div>
     </header>
 
-    <main>
+    <main id="contenido-principal">
       <section class="hero" id="inicio">
         <div class="container hero-grid">
           <div class="reveal">
@@ -2242,7 +2270,7 @@
         aria-modal="true"
         aria-labelledby="modalTitle"
       >
-        <button class="modal-close" type="button" data-close-modal>✕</button>
+        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar formulario">✕</button>
 
         <div class="modal-logo-wrap">
           <div class="brand brand-modal" aria-label="Tracción Digital">
