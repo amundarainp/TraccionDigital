@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /auditoria-
+
+Sitemap: https://www.traccion-digital.com.ar/sitemap.xml
