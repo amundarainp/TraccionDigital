@@ -791,11 +791,22 @@
         gap: 48px;
       }
 
-      .footer-brand .brand-logo-footer {
-        height: 52px;
-        width: auto;
-        filter: brightness(1.5) contrast(1.2);
-        margin-bottom: 16px;
+      .footer-brand .brand-footer {
+        margin-bottom: 18px;
+      }
+
+      .footer-brand .brand-mark {
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+      }
+
+      .footer-brand .brand-name {
+        font-size: 0.98rem;
+      }
+
+      .footer-brand .brand-tagline {
+        font-size: 0.58rem;
       }
 
       .footer-brand p {
@@ -976,15 +987,18 @@
       }
 
       .modal-logo-wrap {
-        text-align: center;
+        display: flex;
+        justify-content: center;
         margin-bottom: 24px;
       }
 
-      .modal-logo {
-        display: inline-block;
-        height: 68px;
-        width: auto;
-        filter: brightness(1.5) contrast(1.2);
+      .brand-modal {
+        justify-content: center;
+      }
+
+      .brand-modal .brand-mark {
+        width: 52px;
+        height: 52px;
       }
 
       .field {
@@ -1978,13 +1992,13 @@
       <div class="container">
         <div class="footer-inner">
           <div class="footer-brand">
-            <img
-              class="brand-logo-footer"
-              src="TD_Logo_Compacto_ArquitecturaVentas_Dark.png"
-              alt="Tracción Digital"
-              loading="lazy"
-              decoding="async"
-            />
+            <a class="brand brand-footer" href="#inicio" aria-label="Tracción Digital · Inicio">
+              <img class="brand-mark" src="TD_Favicon_Simplificado.png" alt="" width="46" height="46" loading="lazy" decoding="async" />
+              <span class="brand-copy">
+                <span class="brand-name">TRACCIÓN DIGITAL</span>
+                <span class="brand-tagline">Arquitectura de Ventas</span>
+              </span>
+            </a>
             <p>
               Sistemas digitales para negocios que quieren conseguir más
               consultas y convertirlas en clientes.
@@ -2193,13 +2207,13 @@
         <button class="modal-close" type="button" data-close-modal>✕</button>
 
         <div class="modal-logo-wrap">
-          <img
-            class="modal-logo"
-            src="TD_Logo_Compacto_ArquitecturaVentas_Dark.png"
-            alt="Tracción Digital"
-            loading="lazy"
-            decoding="async"
-          />
+          <div class="brand brand-modal" aria-label="Tracción Digital">
+            <img class="brand-mark" src="TD_Favicon_Simplificado.png" alt="" width="52" height="52" loading="lazy" decoding="async" />
+            <span class="brand-copy">
+              <span class="brand-name">TRACCIÓN DIGITAL</span>
+              <span class="brand-tagline">Arquitectura de Ventas</span>
+            </span>
+          </div>
         </div>
 
         <h2 class="modal-title" id="modalTitle">
