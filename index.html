@@ -2393,6 +2393,7 @@
       const openModalButtons = document.querySelectorAll(".open-contact-modal");
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
+      let lastModalTrigger = null;
 
       const menuToggle = document.getElementById("menuToggle");
       const mainNav = document.getElementById("mainNav");
@@ -2419,7 +2420,10 @@
 
       console.info("TRACCION DIGITAL BUILD", LANDING_VERSION);
 
-      function openModal() {
+      function openModal(trigger = null) {
+        lastModalTrigger =
+          trigger instanceof HTMLElement ? trigger : document.activeElement;
+
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
         document.body.classList.add("modal-open");
@@ -2437,6 +2441,12 @@
         modal.classList.remove("active");
         modal.setAttribute("aria-hidden", "true");
         document.body.classList.remove("modal-open");
+
+        if (lastModalTrigger && typeof lastModalTrigger.focus === "function") {
+          lastModalTrigger.focus();
+        }
+
+        lastModalTrigger = null;
       }
 
       function normalizarTelefonoParaCrm(telefonoRaw, codigoPais) {
@@ -2483,7 +2493,7 @@
       }
 
       openModalButtons.forEach((button) => {
-        button.addEventListener("click", openModal);
+        button.addEventListener("click", () => openModal(button));
       });
 
       closeModalButtons.forEach((button) => {
@@ -2491,8 +2501,46 @@
       });
 
       document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && modal.classList.contains("active")) {
+        if (!modal.classList.contains("active")) {
+          return;
+        }
+
+        if (event.key === "Escape") {
           closeModal();
+          return;
+        }
+
+        if (event.key !== "Tab") {
+          return;
+        }
+
+        const focusableElements = Array.from(
+          modal.querySelectorAll(
+            'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+          ),
+        ).filter((element) => element.offsetParent !== null);
+
+        if (!focusableElements.length) {
+          event.preventDefault();
+          return;
+        }
+
+        const firstFocusable = focusableElements[0];
+        const lastFocusable = focusableElements[focusableElements.length - 1];
+
+        if (
+          event.shiftKey &&
+          (document.activeElement === firstFocusable ||
+            !modal.contains(document.activeElement))
+        ) {
+          event.preventDefault();
+          lastFocusable.focus();
+        } else if (
+          !event.shiftKey &&
+          document.activeElement === lastFocusable
+        ) {
+          event.preventDefault();
+          firstFocusable.focus();
         }
       });
 
