@@ -1237,6 +1237,19 @@
         }
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        .reveal,
+        .reveal.visible {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
       @media (max-width: 640px) {
         .header-inner {
           min-height: 68px;
@@ -1318,6 +1331,17 @@
 
         .phone-group {
           grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .floating-wa {
+          width: 54px;
+          padding: 0;
+        }
+
+        .floating-wa span:last-child {
+          display: none;
         }
       }
     </style>
@@ -2367,7 +2391,7 @@
             Continuar por WhatsApp
           </button>
 
-          <p class="modal-note">Se abrirá WhatsApp con tu mensaje ya armado.</p>
+          <p class="modal-note" id="modalStatus" role="status" aria-live="polite">Se abrirá WhatsApp con tu mensaje ya armado.</p>
         </form>
       </div>
     </div>
@@ -2394,6 +2418,7 @@
       const openModalButtons = document.querySelectorAll(".open-contact-modal");
       const closeModalButtons = document.querySelectorAll("[data-close-modal]");
       const modalForm = document.getElementById("modalWhatsappForm");
+      const modalStatus = document.getElementById("modalStatus");
       let lastModalTrigger = null;
 
       const menuToggle = document.getElementById("menuToggle");
@@ -2415,7 +2440,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-19-phone-required-v1";
+      const LANDING_VERSION = "2026-08-19-conversion-v2";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
@@ -2631,24 +2656,47 @@
             fechaIso: new Date().toISOString(),
           };
 
-          try {
-            console.log("ENVIANDO WEBHOOK", payload);
+          if (modalStatus) {
+            modalStatus.textContent = "Abriendo WhatsApp y registrando tus datos...";
+          }
 
-            const response = await fetch(WEBHOOK_URL, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(payload),
+          const whatsappWindow = window.open(url, "_blank");
+
+          if (whatsappWindow) {
+            whatsappWindow.opener = null;
+          }
+
+          const webhookRequest = fetch(WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+            keepalive: true,
+          });
+
+          if (!whatsappWindow) {
+            webhookRequest.catch((error) => {
+              console.error("ERROR EN ENVÍO WEBHOOK", error);
             });
 
+            closeModal();
+            window.location.assign(url);
+            return;
+          }
+
+          try {
+            console.log("ENVIANDO WEBHOOK", payload);
+            const response = await webhookRequest;
             console.log("WEBHOOK RESPUESTA", response.status);
           } catch (error) {
             console.error("ERROR EN ENVÍO WEBHOOK", error);
           } finally {
-            window.open(url, "_blank", "noopener");
-
             closeModal();
+
+            if (modalStatus) {
+              modalStatus.textContent = "Se abrirá WhatsApp con tu mensaje ya armado.";
+            }
 
             if (submitButton) {
               submitButton.disabled = false;
