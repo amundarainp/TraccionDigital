@@ -6,11 +6,14 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png" />
     <link rel="shortcut icon" href="favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="preload" as="image" href="TD_Marca_Web_160.png" />
     <meta name="theme-color" content="#17202A" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <title>
       Tracción Digital | Sistemas digitales para conseguir más consultas y
       clientes
@@ -59,6 +62,103 @@
         }
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.traccion-digital.com.ar/#website",
+            "url": "https://www.traccion-digital.com.ar/",
+            "name": "Tracción Digital",
+            "inLanguage": "es-AR",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Tracción Digital",
+              "url": "https://www.traccion-digital.com.ar/"
+            }
+          },
+          {
+            "@type": "Service",
+            "@id": "https://www.traccion-digital.com.ar/#servicio",
+            "name": "Sistemas digitales y arquitectura de ventas",
+            "provider": {
+              "@type": "Organization",
+              "name": "Tracción Digital",
+              "url": "https://www.traccion-digital.com.ar/"
+            },
+            "areaServed": "Argentina",
+            "availableChannel": {
+              "@type": "ServiceChannel",
+              "serviceUrl": "https://www.traccion-digital.com.ar/"
+            },
+            "description": "Diseño e implementación de páginas comerciales, automatizaciones, organización de consultas, CRM y seguimiento comercial adaptados a cada negocio."
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://www.traccion-digital.com.ar/#preguntas-frecuentes",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "¿Esto es solo una página web?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. La página web es una parte. El foco está en captar consultas, relevar información, organizar oportunidades y facilitar el seguimiento comercial."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿También se puede automatizar Instagram y Facebook?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí. Según el alcance, podemos hacer preguntas, recopilar datos, clasificar consultas y dejar la información organizada para continuar la atención y el seguimiento."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Puedo empezar con algo simple?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Sí. La idea es comenzar con una base sólida y después ampliar automatizaciones y seguimiento si hace falta."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Necesito tener todo armado antes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. Podemos trabajar desde cero o mejorar lo que ya tengas, según el punto en el que esté tu negocio."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Qué necesito para empezar?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Información básica del negocio, servicios principales, canales de contacto y los materiales disponibles. Si todavía no está todo armado, podemos avanzar desde una base simple."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "¿Tengo que saber de tecnología para usarlo?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. El sistema está pensado para que el negocio trabaje con más claridad y orden sin necesidad de comprender cuestiones técnicas."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+    <noscript>
+      <style>
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      </style>
+    </noscript>
     <style>
       :root {
         --bg: #0b0f16;
@@ -2616,20 +2716,25 @@
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("visible");
-            }
-          });
-        },
-        { threshold: 0.12 },
-      );
+      const revealElements = document.querySelectorAll(".reveal");
 
-      document
-        .querySelectorAll(".reveal")
-        .forEach((el) => observer.observe(el));
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12 },
+        );
+
+        revealElements.forEach((element) => observer.observe(element));
+      } else {
+        revealElements.forEach((element) => element.classList.add("visible"));
+      }
 
       const modal = document.getElementById("contactModal");
       const openModalButtons = document.querySelectorAll(".open-contact-modal");
@@ -2662,7 +2767,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-20-conversion-tracking-v9";
+      const LANDING_VERSION = "2026-08-20-technical-seo-v11";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
