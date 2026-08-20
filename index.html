@@ -1502,6 +1502,7 @@
               <button
                 class="btn btn-secondary open-contact-modal"
                 type="button"
+                data-cta-origin="hero_whatsapp"
               >
                 Hablar por WhatsApp
               </button>
@@ -1882,6 +1883,7 @@
                 class="btn btn-secondary open-contact-modal"
                 type="button"
                 data-plan="Sistema Inicial"
+                data-cta-origin="planes_sistema_inicial"
               >
                 Consultar Sistema Inicial
               </button>
@@ -1928,6 +1930,7 @@
                 class="btn btn-primary open-contact-modal"
                 type="button"
                 data-plan="Sistema Profesional"
+                data-cta-origin="planes_sistema_profesional"
               >
                 Consultar Sistema Profesional
               </button>
@@ -1974,6 +1977,7 @@
                 class="btn btn-secondary open-contact-modal"
                 type="button"
                 data-plan="Arquitectura de Ventas"
+                data-cta-origin="planes_arquitectura_ventas"
               >
                 Consultar Arquitectura de Ventas
               </button>
@@ -2159,6 +2163,7 @@
                 <button
                   class="btn btn-secondary open-contact-modal"
                   type="button"
+                  data-cta-origin="cierre_whatsapp"
                 >
                   Hablar por WhatsApp
                 </button>
@@ -2370,6 +2375,7 @@
       class="floating-wa open-contact-modal"
       type="button"
       aria-label="Abrir WhatsApp"
+      data-cta-origin="boton_flotante_whatsapp"
     >
       <span class="floating-wa-icon">💬</span>
       <span>WhatsApp</span>
@@ -2399,12 +2405,12 @@
         </div>
 
         <h2 class="modal-title" id="modalTitle">
-          Antes de abrir WhatsApp, contanos brevemente sobre tu negocio
+          Contanos sobre tu negocio y seguimos por WhatsApp
         </h2>
 
         <p class="modal-subtext" id="modalDescription">
-          Así la conversación se abre con contexto real de tu negocio y podemos
-          orientarte mejor desde el primer mensaje.
+          Completá estos datos una sola vez. Se abrirá WhatsApp con tu consulta
+          preparada para que podamos orientarte mejor.
         </p>
 
         <p class="modal-plan" id="modalPlan" hidden></p>
@@ -2527,6 +2533,7 @@
       const modalStatus = document.getElementById("modalStatus");
       let lastModalTrigger = null;
       let selectedPlan = "";
+      let selectedCtaOrigin = "";
 
       const menuToggle = document.getElementById("menuToggle");
       const mainNav = document.getElementById("mainNav");
@@ -2547,7 +2554,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-20-plans-commercial-v8";
+      const LANDING_VERSION = "2026-08-20-conversion-tracking-v9";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
@@ -2557,14 +2564,18 @@
         lastModalTrigger =
           trigger instanceof HTMLElement ? trigger : document.activeElement;
         selectedPlan = trigger instanceof HTMLElement ? trigger.dataset.plan || "" : "";
+        selectedCtaOrigin =
+          trigger instanceof HTMLElement
+            ? trigger.dataset.ctaOrigin || "whatsapp_general"
+            : "whatsapp_general";
 
         if (modalTitle && modalDescription && modalPlan) {
           modalTitle.textContent = selectedPlan
             ? `Consultá por ${selectedPlan}`
-            : "Antes de abrir WhatsApp, contanos brevemente sobre tu negocio";
+            : "Contanos sobre tu negocio y seguimos por WhatsApp";
           modalDescription.textContent = selectedPlan
-            ? "Contanos sobre tu negocio para orientarte y confirmar si este plan es el indicado para vos."
-            : "Así la conversación se abre con contexto real de tu negocio y podemos orientarte mejor desde el primer mensaje.";
+            ? "Completá estos datos para confirmar si este nivel es el indicado y orientarte según tu situación."
+            : "Completá estos datos una sola vez. Se abrirá WhatsApp con tu consulta preparada para que podamos orientarte mejor.";
           modalPlan.textContent = selectedPlan ? `Plan de interés: ${selectedPlan}` : "";
           modalPlan.hidden = !selectedPlan;
         }
@@ -2792,6 +2803,8 @@
             telefonoOriginal: telefono,
             telefonoPais,
             plan_interes: selectedPlan,
+            cta_origen: selectedCtaOrigin,
+            pagina_origen: window.location.href,
             mensaje,
             texto,
             whatsappUrl: url,
