@@ -672,7 +672,48 @@
       }
 
       .plan-copy {
-        min-height: 96px;
+        min-height: 132px;
+      }
+
+      .plan-block {
+        padding: 16px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .plan-block p {
+        margin-top: 6px;
+        font-size: 0.94rem;
+      }
+
+      .plan-outcome {
+        margin-bottom: 16px;
+      }
+
+      .plan-label {
+        display: block;
+        color: var(--accent-2);
+        font-size: 0.74rem;
+        font-weight: 900;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .plans-note {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 24px;
+        padding: 18px 22px;
+        border: 1px solid var(--line-strong);
+        border-radius: 16px;
+        background: rgba(215, 180, 106, 0.07);
+        color: var(--muted);
+        text-align: center;
+      }
+
+      .plans-note strong {
+        color: var(--text);
       }
 
       .price {
@@ -1335,6 +1376,16 @@
           flex-direction: column;
         }
 
+        .plan-copy {
+          min-height: 0;
+        }
+
+        .plans-note {
+          align-items: flex-start;
+          flex-direction: column;
+          text-align: left;
+        }
+
         .btn {
           width: 100%;
         }
@@ -1783,41 +1834,55 @@
       <section id="planes">
         <div class="container">
           <div class="section-head reveal">
-            <h2>Planes de implementación</h2>
+            <div class="mini-title">NIVELES DE IMPLEMENTACIÓN</div>
+            <h2>Un sistema acorde al momento real de tu negocio.</h2>
             <p>
-              Los planes funcionan como referencia clara según el nivel de
-              estructura, automatización y seguimiento que necesite tu negocio.
+              No todos necesitan la misma estructura. Partimos de un diagnóstico
+              y recomendamos el nivel que resuelve tu necesidad actual sin sumar
+              herramientas innecesarias.
             </p>
           </div>
 
           <div class="pricing">
             <article class="plan reveal">
-              <span class="pill">Inicial</span>
+              <span class="pill">Base profesional</span>
               <h3>Sistema Inicial</h3>
               <p class="plan-copy">
-                Para negocios que necesitan empezar con una estructura simple y
-                profesional.
+                Para negocios que todavía dependen de mensajes dispersos y
+                necesitan una presencia clara para empezar a recibir consultas
+                de manera profesional.
               </p>
-              <p
-                style="
-                  margin: 16px 0 14px;
-                  color: var(--muted);
-                  font-weight: 600;
-                "
-              >
-                Implementación definida según el tipo de negocio y necesidad.
-              </p>
+
+              <div class="plan-block">
+                <span class="plan-label">Ideal si hoy</span>
+                <p>
+                  No tenés una página comercial clara o tus canales digitales
+                  todavía no conducen a un recorrido de consulta ordenado.
+                </p>
+              </div>
+
+              <div class="plan-block plan-outcome">
+                <span class="plan-label">Qué resuelve</span>
+                <p>
+                  Crea una base digital coherente para que las personas entiendan
+                  qué ofrecés, encuentren cómo contactarte y den el primer paso.
+                </p>
+              </div>
+
+              <span class="plan-label">El sistema puede incluir</span>
               <ul class="list">
-                <li>Página web comercial simple</li>
-                <li>Botón directo a WhatsApp</li>
+                <li>Página web comercial simple y profesional</li>
+                <li>Acceso claro y directo a WhatsApp</li>
                 <li>Integración básica con Instagram y Facebook</li>
-                <li>Google Business configurado</li>
-                <li>Estructura inicial de captación</li>
+                <li>Perfil del negocio en Google configurado</li>
+                <li>Estructura inicial para recibir consultas</li>
               </ul>
+
               <button
                 class="btn btn-secondary open-contact-modal"
                 type="button"
-              data-plan="Sistema Inicial">
+                data-plan="Sistema Inicial"
+              >
                 Consultar Sistema Inicial
               </button>
             </article>
@@ -1826,72 +1891,102 @@
               <span class="pill">Más elegido</span>
               <h3>Sistema Profesional</h3>
               <p class="plan-copy">
-                La mejor opción para negocios que quieren captar mejor,
-                responder más rápido y ordenar sus consultas de forma
-                profesional.
+                Para negocios que ya reciben consultas y necesitan relevar
+                información, ordenar oportunidades y continuar cada conversación
+                con más contexto.
               </p>
-              <p
-                style="
-                  margin: 16px 0 14px;
-                  color: var(--muted);
-                  font-weight: 600;
-                "
-              >
-                Implementación definida según el tipo de negocio y necesidad.
-              </p>
+
+              <div class="plan-block">
+                <span class="plan-label">Ideal si hoy</span>
+                <p>
+                  Respondés muchas veces lo mismo, la información queda repartida
+                  entre canales o no contás con un seguimiento comercial claro.
+                </p>
+              </div>
+
+              <div class="plan-block plan-outcome">
+                <span class="plan-label">Qué resuelve</span>
+                <p>
+                  Conecta captación, automatización y registro para reducir tareas
+                  repetitivas y evitar que las consultas valiosas queden olvidadas.
+                </p>
+              </div>
+
+              <span class="plan-label">El sistema puede incluir</span>
               <ul class="list">
                 <li>Página web optimizada para generar consultas</li>
-                <li>Automatización inicial de WhatsApp</li>
-                <li>Automatización inicial de Instagram y Facebook</li>
-                <li>
-                  Creación de emails corporativos básicos (ej:
-                  contacto@tudominio.com)
-                </li>
-                <li>Google Business optimizado</li>
-                <li>Registro de consultas y oportunidades</li>
-                <li>Seguimiento comercial básico</li>
+                <li>Automatizaciones que hacen preguntas y reúnen datos</li>
+                <li>Clasificación de consultas según necesidad o servicio</li>
+                <li>WhatsApp, Instagram y Facebook conectados al recorrido</li>
+                <li>Perfil del negocio en Google optimizado</li>
+                <li>Dominio y cuentas de correo profesionales</li>
+                <li>CRM personalizado en Google Sheets para organizar oportunidades</li>
+                <li>Estados y seguimiento comercial básico</li>
               </ul>
-              <button class="btn btn-primary open-contact-modal" type="button" data-plan="Sistema Profesional">
+
+              <button
+                class="btn btn-primary open-contact-modal"
+                type="button"
+                data-plan="Sistema Profesional"
+              >
                 Consultar Sistema Profesional
               </button>
             </article>
 
             <article class="plan reveal">
-              <span class="pill">Full</span>
+              <span class="pill">Estructura integral</span>
               <h3>Arquitectura de Ventas</h3>
               <p class="plan-copy">
-                Para negocios que necesitan una estructura más completa para
-                captar, responder, hacer seguimiento y crecer con más control.
+                Para negocios con más volumen, varios servicios o recorridos
+                comerciales que necesitan centralizar la gestión y crecer con
+                mayor control.
               </p>
-              <p
-                style="
-                  margin: 16px 0 14px;
-                  color: var(--muted);
-                  font-weight: 600;
-                "
-              >
-                Implementación definida según el tipo de negocio y necesidad.
-              </p>
+
+              <div class="plan-block">
+                <span class="plan-label">Ideal si hoy</span>
+                <p>
+                  Recibís consultas por distintos canales, necesitás derivarlas o
+                  priorizarlas y ya no alcanza con resolver cada caso manualmente.
+                </p>
+              </div>
+
+              <div class="plan-block plan-outcome">
+                <span class="plan-label">Qué resuelve</span>
+                <p>
+                  Construye una arquitectura conectada para relevar, clasificar,
+                  registrar y acompañar oportunidades con una visión centralizada.
+                </p>
+              </div>
+
+              <span class="plan-label">El sistema puede incluir</span>
               <ul class="list">
-                <li>Todo lo del Sistema Profesional</li>
-                <li>Automatización más avanzada de WhatsApp</li>
-                <li>Automatización más avanzada de Instagram y Facebook</li>
-                <li>
-                  Creación e integración de emails corporativos dentro del
-                  sistema comercial
-                </li>
-                <li>Seguimiento de consultas</li>
-                <li>Organización más completa de oportunidades comerciales</li>
-                <li>Sistema preparado para mayor volumen</li>
-                <li>Dashboard inicial de seguimiento</li>
+                <li>Todo lo definido en el Sistema Profesional</li>
+                <li>Recorridos diferentes según intención, servicio o perfil</li>
+                <li>Automatizaciones más profundas en los canales necesarios</li>
+                <li>Derivación y priorización de oportunidades comerciales</li>
+                <li>CRM personalizado con estados, responsables y seguimientos</li>
+                <li>Integración del correo profesional al sistema comercial</li>
+                <li>Dashboard inicial para visualizar la gestión</li>
+                <li>Estructura preparada para mayor volumen y futuras ampliaciones</li>
               </ul>
+
               <button
                 class="btn btn-secondary open-contact-modal"
                 type="button"
-              data-plan="Arquitectura de Ventas">
+                data-plan="Arquitectura de Ventas"
+              >
                 Consultar Arquitectura de Ventas
               </button>
             </article>
+          </div>
+
+          <div class="plans-note reveal">
+            <strong>El diagnóstico define la recomendación.</strong>
+            <span>
+              El alcance final se adapta a los canales, el volumen de consultas y
+              la forma de trabajo de cada negocio. No sumamos herramientas que no
+              aporten una mejora concreta.
+            </span>
           </div>
         </div>
       </section>
@@ -2452,7 +2547,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-20-clear-language-v7";
+      const LANDING_VERSION = "2026-08-20-plans-commercial-v8";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
