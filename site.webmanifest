@@ -1,6 +1,12 @@
 {
   "name": "Tracción Digital",
   "short_name": "TD",
+  "description": "Sistemas digitales para captar, organizar y dar seguimiento a consultas.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "es-AR",
+  "dir": "ltr",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -14,6 +20,7 @@
     }
   ],
   "theme_color": "#17202A",
-  "background_color": "#F7F2E8",
-  "display": "standalone"
+  "background_color": "#0B0F16",
+  "display": "standalone",
+  "categories": ["business", "productivity"]
 }
