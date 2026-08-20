@@ -577,6 +577,7 @@
       .modal-subtext,
       label,
       input,
+      select,
       textarea {
         color: var(--muted);
       }
@@ -1097,6 +1098,7 @@
       }
 
       input,
+      select,
       textarea {
         width: 100%;
         border: 1px solid var(--line);
@@ -1117,9 +1119,25 @@
       }
 
       input:focus,
+      select:focus,
       textarea:focus {
         border-color: rgba(215, 180, 106, 0.42);
         background: rgba(255, 255, 255, 0.05);
+      }
+
+      select {
+        min-height: 52px;
+        color-scheme: dark;
+      }
+
+      select option {
+        background: #151b27;
+        color: var(--text);
+      }
+
+      input[aria-invalid="true"] {
+        border-color: #e48686;
+        box-shadow: 0 0 0 3px rgba(228, 134, 134, 0.12);
       }
 
       textarea {
@@ -2299,6 +2317,7 @@
               name="nombre"
               type="text"
               placeholder="Tu nombre"
+              autocomplete="name"
               required
             />
           </div>
@@ -2310,6 +2329,7 @@
               name="negocio"
               type="text"
               placeholder="Ej. estudio contable, limpieza, estética"
+              autocomplete="organization"
               required
             />
           </div>
@@ -2321,6 +2341,7 @@
               name="email"
               type="email"
               placeholder="tunombre@email.com"
+              autocomplete="email"
               required
             />
           </div>
@@ -2328,7 +2349,13 @@
           <div class="field">
             <label for="modalTelefono">WhatsApp</label>
             <div class="phone-group">
-              <select id="modalTelefonoPais" name="telefonoPais" required>
+              <select
+                id="modalTelefonoPais"
+                name="telefonoPais"
+                aria-label="País del número de WhatsApp"
+                autocomplete="tel-country-code"
+                required
+              >
                 <option value="54" selected>Argentina (+54)</option>
                 <option value="598">Uruguay (+598)</option>
                 <option value="56">Chile (+56)</option>
@@ -2343,13 +2370,14 @@
                 type="tel"
                 placeholder="Área + número (sin 0 ni 15)"
                 inputmode="tel"
-                autocomplete="tel"
+                autocomplete="tel-national"
+                aria-describedby="modalTelefonoAyuda modalStatus"
+                minlength="6"
                 required
               />
             </div>
-            <p class="phone-hint">
-              Se enviará normalizado al webhook en formato internacional:
-              +xxxxxxxxxxx
+            <p class="phone-hint" id="modalTelefonoAyuda">
+              Ingresá código de área y número, sin 0 ni 15.
             </p>
           </div>
 
@@ -2419,7 +2447,7 @@
         });
       }
 
-      const LANDING_VERSION = "2026-08-19-commercial-structure-v4";
+      const LANDING_VERSION = "2026-08-20-form-quality-v5";
       const WEBHOOK_URL =
         "https://hook.us2.make.com/7r7boybtctqr8qz29n557xmrrexcahuy";
 
@@ -2561,6 +2589,19 @@
         }
       });
 
+      const telefonoInput = document.getElementById("modalTelefono");
+
+      if (telefonoInput) {
+        telefonoInput.addEventListener("input", () => {
+          telefonoInput.removeAttribute("aria-invalid");
+
+          if (modalStatus) {
+            modalStatus.textContent =
+              "Se abrirá WhatsApp con tu mensaje ya armado.";
+          }
+        });
+      }
+
       if (modalForm) {
         modalForm.addEventListener("submit", async function (event) {
           event.preventDefault();
@@ -2603,10 +2644,18 @@
             return;
           }
 
-          if (!telefonoNormalizado) {
-            alert(
-              "Revisá el WhatsApp. Debe poder normalizarse al formato internacional (+xxxxxxxxxxx).",
-            );
+          if (!/^\d{8,15}$/.test(telefonoNormalizado)) {
+            const telefonoInput = document.getElementById("modalTelefono");
+
+            if (telefonoInput) {
+              telefonoInput.setAttribute("aria-invalid", "true");
+              telefonoInput.focus();
+            }
+
+            if (modalStatus) {
+              modalStatus.textContent =
+                "Revisá el número de WhatsApp e ingresalo con código de área.";
+            }
 
             if (submitButton) {
               submitButton.disabled = false;
@@ -2615,6 +2664,8 @@
 
             return;
           }
+
+          document.getElementById("modalTelefono").removeAttribute("aria-invalid");
 
           const texto = [
             "Hola, quiero conocer qué sistema digital me conviene para mi negocio.",
