@@ -1,0 +1,35 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: SAMEORIGIN
+
+/favicon.ico
+  Cache-Control: public, max-age=86400
+
+/favicon.svg
+  Cache-Control: public, max-age=86400
+
+/favicon-16x16.png
+  Cache-Control: public, max-age=86400
+
+/favicon-32x32.png
+  Cache-Control: public, max-age=86400
+
+/favicon-48x48.png
+  Cache-Control: public, max-age=86400
+
+/apple-touch-icon.png
+  Cache-Control: public, max-age=86400
+
+/android-chrome-192x192.png
+  Cache-Control: public, max-age=86400
+
+/android-chrome-512x512.png
+  Cache-Control: public, max-age=86400
+
+/TD_Marca_Web_160.png
+  Cache-Control: public, max-age=86400
+
+/og-traccion-digital.png
+  Cache-Control: public, max-age=86400
