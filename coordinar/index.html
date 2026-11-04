@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coordinar Contacto · Tracción Digital</title>
+  
+  <!-- Favicon e Iconografía Oficial -->
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="apple-touch-icon" href="../TD_Marca_Web_160.png" />
+  
+  <!-- Tipografía Inter & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN para entorno estático -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#070a12',
+              dark: '#0c101d',
+              card: '#121829',
+              gold: '#d8b56b',
+              goldLight: '#f3d289',
+              goldHover: '#c5a059',
+              goldDark: '#8c6d32',
+              border: '#1e293b'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Estética negra y dorada oficial TD */
+    body {
+      background-color: #070a12;
+      color: #f8fafc;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #f3d289 0%, #d8b56b 50%, #b89243 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gold-glow {
+      box-shadow: 0 0 25px -5px rgba(216, 181, 107, 0.25);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0c101d;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #d8b56b;
+    }
+  </style>
+</head>
+<body class="bg-[#070a12] text-slate-100 flex flex-col justify-between selection:bg-[#d8b56b]/30 selection:text-white">
+
+  <!-- Header Superior con Logo Oficial y Eslogan -->
+  <header class="w-full border-b border-slate-800/80 bg-[#070a12]/95 backdrop-blur-md sticky top-0 z-40">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Logo Horizontal Oficial TD -->
+        <a href="../" class="flex items-center gap-3 group">
+          <img 
+            src="../assets/TD_Logo_Horizontal_Premium_ArquitecturaVentas_Dark.png" 
+            alt="Tracción Digital — ARQUITECTURA DE VENTAS" 
+            class="h-10 sm:h-12 w-auto object-contain cursor-pointer transition-opacity group-hover:opacity-90"
+            onerror="this.onerror=null; this.src='../assets/Horizontal_transparente_borde_negro_letras_dorado.png';"
+          />
+          <span class="sr-only">Tracción Digital — ARQUITECTURA DE VENTAS</span>
+        </a>
+      </div>
+
+      <!-- Badge de Zona Horaria y Seguridad -->
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium bg-[#121829] border border-slate-800 text-slate-300">
+          <span class="w-2 h-2 rounded-full bg-[#d8b56b] animate-pulse"></span>
+          BA (GMT-3)
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Informativo de Modo / Estado -->
+  <div id="demoBanner" class="w-full bg-[#121829] border-b border-[#d8b56b]/30 py-2 px-4 text-center">
+    <p class="text-xs sm:text-sm text-slate-300 font-mono flex items-center justify-center gap-2">
+      <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#d8b56b]/20 text-[#f3d289] border border-[#d8b56b]/40">MODO DEMOSTRACIÓN</span>
+      <span>Integración con servidor desconectada. Las solicitudes no impactan en sistemas de producción.</span>
+    </p>
+  </div>
+
+  <!-- Contenedor Principal del Formulario -->
+  <main class="flex-1 max-w-4xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    
+    <!-- Título y Bajada -->
+    <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+      <h1 class="text-2xl sm:text-4xl font-bold tracking-tight text-white mb-3">
+        Coordinemos una <span class="gold-gradient-text">Conversación Comercial</span>
+      </h1>
+      <p class="text-sm sm:text-base text-slate-400">
+        Elegí el día y horario que mejor se adapte a tu agenda. Nos pondremos en contacto para evaluar tu sistema.
+      </p>
+    </div>
+
+    <!-- Alertas y Notificaciones Dinámicas -->
+    <div id="alertBox" class="hidden mb-6 p-4 rounded-xl border text-sm font-medium transition-all"></div>
+
+    <!-- Formulario / Selector Visual -->
+    <div id="formCard" class="bg-[#0c101d] border border-slate-800 rounded-2xl p-4 sm:p-8 gold-glow relative overflow-hidden">
+      
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+        
+        <!-- Columna Izquierda: Calendario Visual (7 Cols) -->
+        <div class="md:col-span-7 flex flex-col">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300 flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#d8b56b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+              </svg>
+              1. Seleccioná el Día
+            </h2>
+            <!-- Selector de Mes / Navegación -->
+            <div class="flex items-center gap-1 text-sm font-mono text-slate-400">
+              <button id="prevMonthBtn" type="button" class="p-1 rounded hover:bg-slate-800 hover:text-white transition-colors" title="Mes anterior">
+                &larr;
+              </button>
+              <span id="currentMonthYearLabel" class="font-semibold text-white px-2">Noviembre 2026</span>
+              <button id="nextMonthBtn" type="button" class="p-1 rounded hover:bg-slate-800 hover:text-white transition-colors" title="Mes siguiente">
+                &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Matriz de Días de la Semana -->
+          <div class="grid grid-cols-7 gap-1 text-center mb-2">
+            <span class="text-[11px] font-mono text-slate-500 font-semibold">LU</span>
+            <span class="text-[11px] font-mono text-slate-500 font-semibold">MA</span>
+            <span class="text-[11px] font-mono text-slate-500 font-semibold">MI</span>
+            <span class="text-[11px] font-mono text-slate-500 font-semibold">JU</span>
+            <span class="text-[11px] font-mono text-slate-500 font-semibold">VI</span>
+            <span class="text-[11px] font-mono text-slate-600 font-semibold">SA</span>
+            <span class="text-[11px] font-mono text-slate-600 font-semibold">DO</span>
+          </div>
+
+          <!-- Rejilla Dinámica de Días -->
+          <div id="calendarGrid" class="grid grid-cols-7 gap-1.5 flex-1">
+            <!-- Renderizado por JS -->
+          </div>
+
+          <div class="mt-4 flex items-center justify-between text-xs text-slate-500 border-t border-slate-800/80 pt-3">
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#121829] border border-[#d8b56b]/40"></span>
+              Disponible
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-900 border border-slate-800"></span>
+              No laborable / Pasado
+            </span>
+            <span class="flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#d8b56b]"></span>
+              Seleccionado
+            </span>
+          </div>
+        </div>
+
+        <!-- Columna Derecha: Selector de Horarios (5 Cols) -->
+        <div class="md:col-span-5 flex flex-col justify-between border-t md:border-t-0 md:border-l border-slate-800 pt-6 md:pt-0 md:pl-8">
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-wider text-slate-300 mb-4 flex items-center gap-2">
+              <svg class="w-4 h-4 text-[#d8b56b]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              2. Seleccioná el Horario
+            </h2>
+
+            <!-- Indicador del día seleccionado -->
+            <div id="selectedDayBanner" class="p-3 rounded-lg bg-[#121829] border border-slate-800 text-xs font-mono text-slate-300 mb-4 flex items-center justify-between">
+              <span>Día elegido:</span>
+              <span id="selectedDayText" class="font-bold text-[#f3d289]">Seleccioná un día</span>
+            </div>
+
+            <!-- Grilla de Horarios Disponibles -->
+            <div id="timeSlotsContainer" class="grid grid-cols-2 gap-2 max-h-56 overflow-y-auto pr-1 custom-scrollbar">
+              <!-- Renderizado por JS según slots aprobados (10:00, 11:00, 12:00, 14:00, 15:00, 16:00, 17:00, 18:00) -->
+            </div>
+          </div>
+
+          <!-- Resumen de Solicitud y Botón de Acción -->
+          <div class="mt-6 pt-4 border-t border-slate-800">
+            <button 
+              id="submitBtn" 
+              type="button" 
+              disabled 
+              class="w-full py-3.5 px-4 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-slate-800 text-slate-500 cursor-not-allowed"
+            >
+              <span id="submitBtnText">Confirmar Solicitud</span>
+              <svg id="submitSpinner" class="hidden animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+            </button>
+            <p class="text-[11px] text-slate-500 text-center mt-2.5">
+              Zona horaria: <strong class="text-slate-400">America/Argentina/Buenos_Aires</strong>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Vista de Confirmación Aprobada (Oculta Inicialmente) -->
+    <div id="confirmationCard" class="hidden bg-[#0c101d] border border-[#d8b56b]/40 rounded-2xl p-6 sm:p-12 text-center gold-glow max-w-xl mx-auto">
+      <div class="w-16 h-16 rounded-full bg-[#121829] border border-[#d8b56b] flex items-center justify-center mx-auto mb-6 text-[#d8b56b]">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-bold text-white mb-4">
+        Solicitud Registrada
+      </h3>
+
+      <!-- TEXTO APROBADO OBLIGATORIO -->
+      <p class="text-sm sm:text-base text-slate-300 leading-relaxed mb-6 bg-[#121829]/70 p-4 rounded-xl border border-slate-800">
+        «Recibimos tu solicitud. Nos estaremos comunicando con vos aproximadamente en el día y horario que nos indicaste.»
+      </p>
+
+      <!-- Ficha de la cita solicitada -->
+      <div class="bg-[#070a12] p-4 rounded-xl border border-slate-800 text-left text-xs font-mono text-slate-400 space-y-2 mb-6">
+        <div class="flex justify-between">
+          <span>Fecha solicitada:</span>
+          <strong id="confFecha" class="text-white">--</strong>
+        </div>
+        <div class="flex justify-between">
+          <span>Horario solicitado:</span>
+          <strong id="confHora" class="text-white">--</strong>
+        </div>
+        <div class="flex justify-between">
+          <span>Zona horaria:</span>
+          <strong class="text-slate-300">America/Argentina/Buenos_Aires</strong>
+        </div>
+        <div class="flex justify-between border-t border-slate-800/80 pt-2">
+          <span>ID de Solicitud:</span>
+          <strong id="confReqId" class="text-[#f3d289]">--</strong>
+        </div>
+      </div>
+
+      <p class="text-xs text-slate-500">
+        Podés cerrar esta ventana o volver a la página principal.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Footer Institucional Mínimo -->
+  <footer class="w-full border-t border-slate-800/80 py-6 text-center text-xs text-slate-600 bg-[#070a12]">
+    <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>&copy; 2026 Tracción Digital · ARQUITECTURA DE VENTAS</p>
+      <p class="font-mono text-[11px] text-slate-500">Sistemas & Procesos Comerciales</p>
+    </div>
+  </footer>
+
+  <!-- LÓGICA DE CAPTURA ESTRUCTURADA Y VALIDACIONES SEGURAS -->
+  <script>
+    (function() {
+      'use strict';
+
+      // 1. Configuración Canónica
+      const CONFIG = {
+        TIMEZONE: 'America/Argentina/Buenos_Aires',
+        TIME_SLOTS: ['10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+        MIN_DAYS_NOTICE: 1, // Mínimo 24 hs de anticipación
+        MAX_DAYS_AHEAD: 30, // Máximo 30 días vista
+        DEMO_MODE: true, // true mientras no esté conectada la integración Make/Servidor
+        API_ENDPOINT: '/api/coordinar/solicitar' // Endpoint servidor previsto (no expone webhooks en el cliente)
+      };
+
+      // 2. Estado de la Aplicación
+      const state = {
+        currentMonth: new Date().getMonth(),
+        currentYear: new Date().getFullYear(),
+        selectedDate: null,   // Objeto Date o YYYY-MM-DD
+        selectedTime: null,   // HH:MM
+        isSubmitting: false,
+        submittedRequestId: null,
+        
+        // Identidad capturada desde URL (para reenviar al servidor que validará la firma)
+        uid: null,
+        req: null,
+        exp: null,
+        sig: null
+      };
+
+      // 3. Extracción de Parámetros de URL
+      function parseUrlParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        state.uid = urlParams.get('uid') || urlParams.get('lead_uid');
+        state.req = urlParams.get('req') || urlParams.get('solicitud_id') || ('REQ-' + Math.random().toString(36).substring(2, 9).toUpperCase());
+        state.exp = urlParams.get('exp');
+        state.sig = urlParams.get('sig') || urlParams.get('token');
+
+        // REGLA OBLIGATORIA: No aceptar identidad únicamente porque viene en parámetros editables.
+        // Se preserva para enviar al backend en la firma HMAC. Si falta o expira, se notifica modo demo/consulta.
+        if (!state.sig) {
+          showAlert('info', 'Estás navegando en modo de consulta abierta. Para registrar una reunión vinculada a tu cuenta, utilizá el enlace personalizado que recibiste por WhatsApp.');
+        } else if (state.exp && Math.floor(Date.now() / 1000) > parseInt(state.exp, 10)) {
+          showAlert('error', 'El enlace de solicitud ha expirado. Por favor, solicitá un nuevo enlace desde el canal de atención.');
+        } else {
+          // Ocultar banner de demostración si el enlace está firmado
+          const demoBanner = document.getElementById('demoBanner');
+          if (demoBanner) demoBanner.classList.add('hidden');
+        }
+      }
+
+      // 4. Elementos del DOM
+      const calendarGrid = document.getElementById('calendarGrid');
+      const timeSlotsContainer = document.getElementById('timeSlotsContainer');
+      const currentMonthYearLabel = document.getElementById('currentMonthYearLabel');
+      const prevMonthBtn = document.getElementById('prevMonthBtn');
+      const nextMonthBtn = document.getElementById('nextMonthBtn');
+      const selectedDayText = document.getElementById('selectedDayText');
+      const submitBtn = document.getElementById('submitBtn');
+      const submitBtnText = document.getElementById('submitBtnText');
+      const submitSpinner = document.getElementById('submitSpinner');
+      const alertBox = document.getElementById('alertBox');
+      const formCard = document.getElementById('formCard');
+      const confirmationCard = document.getElementById('confirmationCard');
+
+      const confFecha = document.getElementById('confFecha');
+      const confHora = document.getElementById('confHora');
+      const confReqId = document.getElementById('confReqId');
+
+      const monthNames = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+      ];
+
+      // 5. Inicialización del Calendario
+      function renderCalendar() {
+        calendarGrid.innerHTML = '';
+        currentMonthYearLabel.textContent = `${monthNames[state.currentMonth]} ${state.currentYear}`;
+
+        // Obtener primer día del mes (0=Dom, 1=Lun...)
+        const firstDayOfMonth = new Date(state.currentYear, state.currentMonth, 1).getDay();
+        // Convertir a semana que inicia el Lunes (0=Lun, 6=Dom)
+        const startingCol = (firstDayOfMonth === 0) ? 6 : firstDayOfMonth - 1;
+        const daysInMonth = new Date(state.currentYear, state.currentMonth + 1, 0).getDate();
+
+        // Rellenar espacios vacíos antes del día 1
+        for (let i = 0; i < startingCol; i++) {
+          const emptyCell = document.createElement('div');
+          emptyCell.className = 'h-10 sm:h-12 rounded-lg';
+          calendarGrid.appendChild(emptyCell);
+        }
+
+        // Obtener fecha actual en zona horaria de Buenos Aires
+        const today = new Date();
+        const minDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + CONFIG.MIN_DAYS_NOTICE);
+        const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + CONFIG.MAX_DAYS_AHEAD);
+
+        // Renderizar cada día del mes
+        for (let d = 1; d <= daysInMonth; d++) {
+          const dayDate = new Date(state.currentYear, state.currentMonth, d);
+          const dayOfWeek = dayDate.getDay(); // 0 = Domingo, 6 = Sábado
+          const isWeekend = (dayOfWeek === 0 || dayOfWeek === 6);
+          const isPast = dayDate < minDate;
+          const isBeyond = dayDate > maxDate;
+          const isDisabled = isWeekend || isPast || isBeyond;
+
+          const dateStr = formatDateISO(dayDate);
+          const isSelected = (state.selectedDate === dateStr);
+
+          const dayBtn = document.createElement('button');
+          dayBtn.type = 'button';
+          dayBtn.dataset.date = dateStr;
+          
+          let baseClasses = 'h-10 sm:h-12 rounded-lg font-mono text-xs sm:text-sm font-semibold flex items-center justify-center transition-all duration-150 ';
+
+          if (isDisabled) {
+            baseClasses += 'text-slate-600 bg-slate-900/40 cursor-not-allowed border border-transparent';
+            dayBtn.disabled = true;
+          } else if (isSelected) {
+            baseClasses += 'bg-[#d8b56b] text-[#070a12] font-bold shadow-md shadow-[#d8b56b]/30 scale-105 border border-[#f3d289]';
+          } else {
+            baseClasses += 'text-slate-200 bg-[#121829] hover:bg-[#1e293b] hover:text-white border border-slate-800/80 hover:border-[#d8b56b]/50 cursor-pointer';
+          }
+
+          dayBtn.className = baseClasses;
+          dayBtn.textContent = d;
+
+          if (!isDisabled) {
+            dayBtn.addEventListener('click', () => selectDate(dateStr, dayDate));
+          }
+
+          calendarGrid.appendChild(dayBtn);
+        }
+      }
+
+      // 6. Selección de Fecha
+      function selectDate(dateStr, dateObj) {
+        state.selectedDate = dateStr;
+        state.selectedTime = null; // Resetear horario al cambiar día
+        
+        // Formatear texto amigable (ej: "Lunes 16 de Noviembre")
+        const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+        selectedDayText.textContent = dateObj.toLocaleDateString('es-AR', options);
+
+        renderCalendar();
+        renderTimeSlots();
+        updateSubmitState();
+      }
+
+      // 7. Renderizado de Horarios
+      function renderTimeSlots() {
+        timeSlotsContainer.innerHTML = '';
+
+        if (!state.selectedDate) {
+          timeSlotsContainer.innerHTML = `
+            <div class="col-span-2 py-8 text-center text-xs text-slate-500 font-mono">
+              Seleccioná un día del calendario para ver los horarios disponibles.
+            </div>
+          `;
+          return;
+        }
+
+        CONFIG.TIME_SLOTS.forEach(time => {
+          const isSelected = (state.selectedTime === time);
+          const slotBtn = document.createElement('button');
+          slotBtn.type = 'button';
+          
+          let classes = 'py-2.5 px-3 rounded-lg font-mono text-xs sm:text-sm font-semibold transition-all border flex items-center justify-center gap-1.5 ';
+          if (isSelected) {
+            classes += 'bg-[#d8b56b] text-[#070a12] font-bold border-[#f3d289] shadow-sm';
+          } else {
+            classes += 'bg-[#121829] text-slate-200 border-slate-800 hover:border-[#d8b56b]/60 hover:text-white';
+          }
+
+          slotBtn.className = classes;
+          slotBtn.innerHTML = `
+            <svg class="w-3.5 h-3.5 ${isSelected ? 'text-[#070a12]' : 'text-[#d8b56b]'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"></path>
+            </svg>
+            ${time} hs
+          `;
+
+          slotBtn.addEventListener('click', () => {
+            state.selectedTime = time;
+            renderTimeSlots();
+            updateSubmitState();
+          });
+
+          timeSlotsContainer.appendChild(slotBtn);
+        });
+      }
+
+      // 8. Estado del Botón de Envío
+      function updateSubmitState() {
+        const canSubmit = state.selectedDate && state.selectedTime && !state.isSubmitting;
+        
+        if (canSubmit) {
+          submitBtn.disabled = false;
+          submitBtn.className = 'w-full py-3.5 px-4 rounded-xl font-bold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-[#d8b56b] text-[#070a12] hover:bg-[#f3d289] shadow-lg shadow-[#d8b56b]/20 cursor-pointer active:scale-[0.99]';
+          submitBtnText.textContent = `Solicitar para ${state.selectedTime} hs`;
+        } else {
+          submitBtn.disabled = true;
+          submitBtn.className = 'w-full py-3.5 px-4 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-slate-800 text-slate-500 cursor-not-allowed';
+          submitBtnText.textContent = 'Confirmar Solicitud';
+        }
+      }
+
+      // 9. Manejo de Envío (Captura Estructurada & Integración Segura)
+      submitBtn.addEventListener('click', async function() {
+        if (!state.selectedDate || !state.selectedTime || state.isSubmitting) return;
+
+        // Validar doble envío del mismo request
+        if (state.submittedRequestId) {
+          showAlert('warning', 'Esta solicitud ya ha sido enviada anteriormente.');
+          return;
+        }
+
+        state.isSubmitting = true;
+        submitBtn.disabled = true;
+        submitSpinner.classList.remove('hidden');
+        submitBtnText.textContent = 'Procesando solicitud...';
+
+        // Estructura Canónica del Payload para Backend / Make
+        // Nota: fecha_reunion canónica en formato legible DD/MM/YYYY HH:mm:ss
+        const [year, month, day] = state.selectedDate.split('-');
+        const fechaReunionCanonico = `${day}/${month}/${year} ${state.selectedTime}:00`;
+
+        const payload = {
+          solicitud_id: state.req,
+          fecha_solicitada: state.selectedDate,
+          hora_solicitada: state.selectedTime,
+          fecha_reunion: fechaReunionCanonico,
+          timezone: CONFIG.TIMEZONE,
+          timestamp_envio: new Date().toISOString(),
+          
+          // Datos de validación de firma
+          lead_uid: state.uid,
+          exp: state.exp,
+          sig: state.sig,
+
+          // Parámetros de arquitectura comercial (ManyChat conserva autoridad)
+          source: 'formulario_coordinar',
+          source_canal: 'web',
+          source_accion: 'reunion_agendada'
+        };
+
+        console.log('[TD Coordinar] Payload estructurado generado:', payload);
+
+        // Si no hay firma o expiró, rechazar envío y alertar
+        if (!state.sig) {
+          showAlert('error', 'Enlace no autenticado. Para registrar una solicitud de conversación es necesario ingresar desde el enlace personalizado recibido por WhatsApp.');
+          state.isSubmitting = false;
+          submitSpinner.classList.add('hidden');
+          updateSubmitState();
+          return;
+        }
+
+        // Llamada al endpoint servidor validador
+        try {
+          const response = await fetch(CONFIG.API_ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const result = await response.json();
+
+          if (response.ok && result.ok) {
+            state.isSubmitting = false;
+
+            // DISTINCIÓN ESTRICTA DE ESTADOS: prepared vs registered
+            if (result.status === 'registered') {
+              // Confirmación definitiva autorizada: Make aceptó y registró
+              state.submittedRequestId = state.req;
+              showConfirmation(payload);
+            } else if (result.status === 'prepared') {
+              // Solicitud validada por el servidor pero pendiente de registro por Make
+              submitSpinner.classList.add('hidden');
+              updateSubmitState();
+              showAlert('warning', 'Tu solicitud fue validada técnicamente, pero la conexión con el sistema de registro aún se encuentra en preparación. No se generó un registro confirmado en este momento.');
+            } else {
+              throw new Error(result.error || 'Respuesta de servidor no concluyente.');
+            }
+          } else {
+            throw new Error(result.error || 'No fue posible registrar tu solicitud en el sistema.');
+          }
+        } catch (error) {
+          console.error('[TD Coordinar] Error en validación servidor:', error);
+          state.isSubmitting = false;
+          submitSpinner.classList.add('hidden');
+          updateSubmitState();
+          showAlert('error', error.message || 'No fue posible registrar tu solicitud en este momento. Por favor intentá nuevamente o comunicate por WhatsApp.');
+        }
+      });
+
+      // 10. Confirmación Aprobada
+      function showConfirmation(payload) {
+        formCard.classList.add('hidden');
+        confirmationCard.classList.remove('hidden');
+
+        const [y, m, d] = payload.fecha_solicitada.split('-');
+        confFecha.textContent = `${d}/${m}/${y}`;
+        confHora.textContent = `${payload.hora_solicitada} hs`;
+        confReqId.textContent = payload.solicitud_id;
+
+        // Desplazar suavemente a la confirmación
+        confirmationCard.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      // 11. Helper de Alertas
+      function showAlert(type, message) {
+        alertBox.classList.remove('hidden', 'bg-red-950/50', 'border-red-800', 'text-red-200', 'bg-blue-950/50', 'border-blue-800', 'text-blue-200', 'bg-amber-950/50', 'border-amber-800', 'text-amber-200');
+        
+        if (type === 'error') {
+          alertBox.classList.add('bg-red-950/50', 'border-red-800', 'text-red-200');
+        } else if (type === 'warning') {
+          alertBox.classList.add('bg-amber-950/50', 'border-amber-800', 'text-amber-200');
+        } else {
+          alertBox.classList.add('bg-blue-950/50', 'border-blue-800', 'text-blue-200');
+        }
+
+        alertBox.textContent = message;
+      }
+
+      // 12. Navegación de Meses
+      prevMonthBtn.addEventListener('click', () => {
+        const today = new Date();
+        if (state.currentYear === today.getFullYear() && state.currentMonth <= today.getMonth()) {
+          return; // No retroceder antes del mes actual
+        }
+        state.currentMonth--;
+        if (state.currentMonth < 0) {
+          state.currentMonth = 11;
+          state.currentYear--;
+        }
+        renderCalendar();
+      });
+
+      nextMonthBtn.addEventListener('click', () => {
+        state.currentMonth++;
+        if (state.currentMonth > 11) {
+          state.currentMonth = 0;
+          state.currentYear++;
+        }
+        renderCalendar();
+      });
+
+      // Helper: Formato YYYY-MM-DD
+      function formatDateISO(d) {
+        const year = d.getFullYear();
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const day = String(d.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
+
+      // Inicializar
+      parseUrlParams();
+      renderCalendar();
+      renderTimeSlots();
+      updateSubmitState();
+
+    })();
+  </script>
+</body>
+</html>
