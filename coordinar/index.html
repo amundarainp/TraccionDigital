@@ -86,8 +86,8 @@
           <img 
             src="../assets/TD_Logo_Horizontal_Premium_ArquitecturaVentas_Dark.png" 
             alt="Tracción Digital — ARQUITECTURA DE VENTAS" 
-            class="h-10 sm:h-12 w-auto object-contain cursor-pointer transition-opacity group-hover:opacity-90"
-            onerror="this.onerror=null; this.src='../assets/Horizontal_transparente_borde_negro_letras_dorado.png';"
+            class="h-11 sm:h-12 w-auto object-contain cursor-pointer transition-opacity group-hover:opacity-90"
+            onerror="this.onerror=null; this.src='../TD_Marca_Web_160.png';"
           />
           <span class="sr-only">Tracción Digital — ARQUITECTURA DE VENTAS</span>
         </a>
@@ -104,7 +104,7 @@
   </header>
 
   <!-- Banner Informativo de Modo / Estado -->
-  <div id="demoBanner" class="w-full bg-[#121829] border-b border-[#d8b56b]/30 py-2 px-4 text-center">
+  <div id="demoBanner" class="hidden w-full bg-[#121829] border-b border-[#d8b56b]/30 py-2 px-4 text-center">
     <p class="text-xs sm:text-sm text-slate-300 font-mono flex items-center justify-center gap-2">
       <span class="px-1.5 py-0.5 rounded text-[10px] font-bold bg-[#d8b56b]/20 text-[#f3d289] border border-[#d8b56b]/40">MODO DEMOSTRACIÓN</span>
       <span>Integración con servidor desconectada. Las solicitudes no impactan en sistemas de producción.</span>
@@ -215,7 +215,7 @@
               disabled 
               class="w-full py-3.5 px-4 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-slate-800 text-slate-500 cursor-not-allowed"
             >
-              <span id="submitBtnText">Confirmar Solicitud</span>
+              <span id="submitBtnText">Solicitar Contacto</span>
               <svg id="submitSpinner" class="hidden animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
@@ -295,7 +295,7 @@
         TIME_SLOTS: ['10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
         MIN_DAYS_NOTICE: 1, // Mínimo 24 hs de anticipación
         MAX_DAYS_AHEAD: 30, // Máximo 30 días vista
-        DEMO_MODE: true, // true mientras no esté conectada la integración Make/Servidor
+        DEMO_MODE: false, // Integración activa con /api/coordinar/solicitar
         API_ENDPOINT: '/api/coordinar/solicitar' // Endpoint servidor previsto (no expone webhooks en el cliente)
       };
 
@@ -326,7 +326,7 @@
         // REGLA OBLIGATORIA: No aceptar identidad únicamente porque viene en parámetros editables.
         // Se preserva para enviar al backend en la firma HMAC. Si falta o expira, se notifica modo demo/consulta.
         if (!state.sig) {
-          showAlert('info', 'Estás navegando en modo de consulta abierta. Para registrar una reunión vinculada a tu cuenta, utilizá el enlace personalizado que recibiste por WhatsApp.');
+          showAlert('info', 'Estás navegando en modo de consulta abierta. Para solicitar un contacto comercial vinculado a tu cuenta, utilizá el enlace personalizado que recibiste por WhatsApp.');
         } else if (state.exp && Math.floor(Date.now() / 1000) > parseInt(state.exp, 10)) {
           showAlert('error', 'El enlace de solicitud ha expirado. Por favor, solicitá un nuevo enlace desde el canal de atención.');
         } else {
@@ -488,7 +488,7 @@
         } else {
           submitBtn.disabled = true;
           submitBtn.className = 'w-full py-3.5 px-4 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2 bg-slate-800 text-slate-500 cursor-not-allowed';
-          submitBtnText.textContent = 'Confirmar Solicitud';
+          submitBtnText.textContent = 'Solicitar Contacto';
         }
       }
 
@@ -567,7 +567,7 @@
               // Solicitud validada por el servidor pero pendiente de registro por Make
               submitSpinner.classList.add('hidden');
               updateSubmitState();
-              showAlert('warning', 'Tu solicitud fue validada técnicamente, pero la conexión con el sistema de registro aún se encuentra en preparación. No se generó un registro confirmado en este momento.');
+              showAlert('warning', 'Tu solicitud fue validada técnicamente, pero el canal de registro se encuentra en preparación. Por favor comunicate directamente por WhatsApp.');
             } else {
               throw new Error(result.error || 'Respuesta de servidor no concluyente.');
             }
