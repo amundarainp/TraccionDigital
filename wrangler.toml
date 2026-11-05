@@ -1,0 +1,7 @@
+name = "traccion-digital"
+compatibility_date = "2026-11-01"
+pages_build_output_dir = "."
+
+[vars]
+TD_GESTION_COMERCIAL_WEBHOOK_URL = "https://hook.us2.make.com/21mkb3nevrpwip14xxp0u5d72gp8vnal"
+TD_MOCK_MAKE_OFFLINE = "false"

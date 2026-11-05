@@ -154,7 +154,7 @@ export async function onRequestPost(context) {
     timestamp_recepcion: new Date().toISOString()
   };
 
-  const makeWebhookUrl = env?.TD_GESTION_COMERCIAL_WEBHOOK_URL;
+  const makeWebhookUrl = env?.TD_GESTION_COMERCIAL_WEBHOOK_URL || 'https://hook.us2.make.com/21mkb3nevrpwip14xxp0u5d72gp8vnal';
 
   // 6. Modo Sin Conexión a Make (Offline / Prepared)
   if (!makeWebhookUrl || env?.TD_MOCK_MAKE_OFFLINE === 'true') {
