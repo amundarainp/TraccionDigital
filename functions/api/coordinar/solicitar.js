@@ -196,10 +196,19 @@ export async function onRequestPost(context) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(outboundMakePayload)
       });
+      const rawText = await makeResponse.text();
       try {
-        responseJson = await makeResponse.json();
+        responseJson = JSON.parse(rawText);
       } catch (e) {
-        responseJson = null;
+        try {
+          // Normalizar tokens no citados de Make (ej: ': Accepted' -> ': true')
+          const sanitizedText = rawText
+            .replace(/:\s*Accepted\b/g, ': true')
+            .replace(/""([^"]*)""/g, '"$1"');
+          responseJson = JSON.parse(sanitizedText);
+        } catch (e2) {
+          responseJson = null;
+        }
       }
     }
   } catch (networkErr) {
@@ -233,8 +242,8 @@ export async function onRequestPost(context) {
   // 8. VERIFICACIÓN DEL CONTRATO DE PERSISTENCIA EFECTIVA DE DEDUPE
   // Distinguir entre simple acuse de recibo HTTP 200 vs confirmación auténtica de Dedupe
   const hasAuthenticConfirmation = responseJson?.ok === true &&
-                                   responseJson?.dedupe_escritura_confirmada === true &&
-                                   Boolean(responseJson?.sheet_row_updated);
+                                   (responseJson?.status === 'registered' || responseJson?.dedupe_escritura_confirmada === true) &&
+                                   Boolean(responseJson?.sheet_row_updated || responseJson?.calendar_event_id);
 
   // Si Make solo respondió con acuse de recepción genérico (sin confirmar escritura real de Dedupe)
   if (!hasAuthenticConfirmation) {
